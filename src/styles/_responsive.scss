@@ -5,15 +5,23 @@
   }
 
   .site-header {
-    margin: 8px 0 36px;
+    gap: 13px;
+    margin: 4px 0 30px;
+    padding: 4px 0;
   }
 
-  .brand-copy strong {
-    font-size: clamp(1.65rem, 8vw, 2.15rem);
+  .project-logo {
+    width: 68px;
   }
 
-  .brand-copy small {
-    font-size: 0.84rem;
+  .brand-copy h1 {
+    font-size: clamp(1.3rem, 5.6vw, 1.7rem);
+    line-height: 1.08;
+  }
+
+  .brand-copy p {
+    font-size: 0.82rem;
+    line-height: 1.35;
   }
 
   .upload-panel {
@@ -46,8 +54,8 @@
 }
 
 @media (max-width: 390px) {
-  .brand-copy strong {
-    font-size: 1.55rem;
+  .brand-copy h1 {
+    font-size: 1.45rem;
   }
 
   .upload-card {

@@ -8,23 +8,43 @@
 }
 
 .site-header {
-  margin: 14px 0 36px;
-  text-align: center;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 24px;
+  margin: 6px 0 34px;
+  padding: 8px 4px;
+  text-align: left;
+}
+
+.project-logo {
+  display: block;
+  width: clamp(86px, 8vw, 104px);
+  height: auto;
+  flex: 0 0 auto;
+  filter: drop-shadow(0 10px 16px rgb(10 102 72 / 12%));
 }
 
 .brand-copy {
   display: grid;
-  gap: 7px;
+  min-width: 0;
+  gap: 8px;
 }
 
-.brand-copy strong {
+.brand-copy h1 {
+  margin: 0;
   color: var(--navy);
-  font-size: clamp(1.85rem, 3vw, 2.55rem);
-  font-weight: 780;
-  letter-spacing: -0.035em;
+  font-size: clamp(2rem, 3vw, 2.7rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  text-wrap: balance;
 }
 
-.brand-copy small {
+.brand-copy p {
+  margin: 0;
   color: var(--muted);
-  font-size: 0.95rem;
+  font-size: 0.96rem;
+  line-height: 1.45;
 }

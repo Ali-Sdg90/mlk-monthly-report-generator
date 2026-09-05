@@ -1,0 +1,8 @@
+node_modules/
+dist/
+coverage/
+.husky/_/
+Design/
+PROJECT_BRIEF.md
+CHANGELOG.md
+package-lock.json

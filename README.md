@@ -1,2 +1,1 @@
 # mlk-monthly-report-generator
-

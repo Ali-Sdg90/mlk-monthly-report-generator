@@ -11,7 +11,7 @@ export default {
       {
         assets: ['package.json', 'package-lock.json', 'CHANGELOG.md'],
         message:
-          'chore(release): bump version to ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}',
+          'chore(release): bump version to ${nextRelease.version}\n\n${nextRelease.notes}',
       },
     ],
     [

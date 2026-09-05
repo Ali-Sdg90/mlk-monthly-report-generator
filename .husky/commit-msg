@@ -6,8 +6,8 @@ RESULT=$?
 if [ $RESULT -ne 0 ]; then
   echo ""
   echo "Commit message format is invalid."
-  echo "Please follow Conventional Commits: <type>(scope): <subject>"
-  echo "Example: feat(report): add spreadsheet validation"
+  echo "Please follow Conventional Commits: <type>: <subject>"
+  echo "Example: feat: add spreadsheet validation"
   echo ""
   exit 1
 fi

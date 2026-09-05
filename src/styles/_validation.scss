@@ -1,0 +1,89 @@
+.validation-result {
+  margin-top: 14px;
+  padding-top: 13px;
+  border-top: 1px solid #e4ece8;
+  direction: rtl;
+  font-family: 'Vazirmatn Variable', sans-serif;
+  text-align: right;
+}
+
+.validation-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.validation-heading strong {
+  font-size: 0.82rem;
+}
+
+.validation-heading small {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 0.68rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.validation-list {
+  display: grid;
+  gap: 7px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.validation-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  color: #4d625a;
+  font-size: 0.78rem;
+}
+
+.validation-list li > span {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  color: #fff;
+}
+
+.validation-list .has-passed > span {
+  background: var(--green);
+}
+
+.validation-list .has-failed > span {
+  border: 1px solid #e9bcbc;
+  color: var(--danger);
+  background: #fff0f0;
+}
+
+.validation-list p {
+  display: grid;
+  margin: 0;
+}
+
+.validation-list small {
+  margin-top: 2px;
+  color: var(--danger);
+}
+
+.file-error {
+  margin: 10px 0 0;
+  padding: 8px 10px;
+  border-radius: 7px;
+  color: #993f3f;
+  background: #fff2f2;
+  font-size: 0.7rem;
+}
+
+.validation-list li > span svg,
+.completion-state > span svg,
+.info-button svg,
+.upload-icon svg {
+  display: block;
+}

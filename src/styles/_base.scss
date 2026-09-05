@@ -1,0 +1,61 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scrollbar-color: #67a98d #e4efe9;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #e4efe9;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 2px solid #e4efe9;
+  border-radius: 999px;
+  background: #67a98d;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4d9275;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(
+      circle at 8% 3%,
+      rgba(47, 157, 116, 0.23),
+      transparent 28rem
+    ),
+    radial-gradient(
+      circle at 92% 90%,
+      rgba(82, 177, 138, 0.15),
+      transparent 26rem
+    ),
+    linear-gradient(180deg, #deefe7 0%, #eef6f2 100%);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button,
+label {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

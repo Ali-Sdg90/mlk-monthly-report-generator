@@ -7,15 +7,20 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "preview": "vite preview",
     "release": "semantic-release",
-    "prepare": "husky"
+    "prepare": "husky",
+    "check": "npm run format:check && npm run lint && npm run build && echo ✅ Everything is OK"
   },
   "dependencies": {
+    "@fontsource-variable/vazirmatn": "^5.3.0",
+    "lucide-react": "^1.41.0",
     "react": "^19.2.8",
-    "react-dom": "^19.2.8"
+    "react-dom": "^19.2.8",
+    "read-excel-file": "^9.3.10"
   },
   "devDependencies": {
     "@commitlint/cli": "^21.2.2",

@@ -10,7 +10,7 @@ function AppHeader() {
       />
       <div className="brand-copy">
         <h1>MLK Monthly Report Generator</h1>
-        <p>Build high-quality monthly real estate reports simply.</p>
+        <p>Create professional monthly real estate reports with ease.</p>
       </div>
     </header>
   )

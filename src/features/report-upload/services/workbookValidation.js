@@ -5,9 +5,11 @@ import {
 } from '../config/workbookRequirements'
 import { normalizeHeader, normalizeText } from '../utils/textNormalization'
 import { isValidPrice, isValidRatio } from '../utils/valueParsers'
+import { parseWorkbookSheets } from './workbookParser'
 
 const buildFailedResult = (message) => ({
   valid: false,
+  data: null,
   sheetNames: [],
   checks: [
     { id: 'readable', label: 'فایل اکسل قابل خواندن است.', passed: false },
@@ -178,7 +180,12 @@ export const validateWorkbook = async (file, kind) => {
   }
 
   try {
-    return validateSheets(await readXlsxFile(file), kind)
+    const sheets = await readXlsxFile(file)
+    const result = validateSheets(sheets, kind)
+
+    return result.valid
+      ? { ...result, data: parseWorkbookSheets(sheets, kind) }
+      : { ...result, data: null }
   } catch {
     return buildFailedResult(
       'فایل قابل خواندن نیست یا ساختار معتبر XLSX ندارد.',

@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.2.1...v1.3.0) (2026-09-06)
+
+
+### Features
+
+* add report preview and feature structure ([a430e87](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/commit/a430e879d49935014ad44fb19a990580735cb284))
+
 ## [1.2.1](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.2.0...v1.2.1) (2026-09-06)
 
 

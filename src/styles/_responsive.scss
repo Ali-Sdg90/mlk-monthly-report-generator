@@ -41,6 +41,24 @@
     width: 100%;
   }
 
+  .report-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .report-toolbar__title {
+    order: -1;
+  }
+
+  .report-toolbar .secondary-button,
+  .report-toolbar .primary-button {
+    width: 100%;
+  }
+
+  .report-preview__viewport {
+    padding: 18px 12px;
+  }
+
   .site-footer {
     align-items: flex-start;
     flex-direction: column;

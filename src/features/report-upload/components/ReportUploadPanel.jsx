@@ -1,18 +1,14 @@
 import { ArrowRight, Check } from 'lucide-react'
 import { uploadDefinitions } from '../config/uploadDefinitions'
-import { useReportUploads } from '../hooks/useReportUploads'
 import FileUploadCard from './FileUploadCard'
 
-function ReportUploadPanel() {
-  const {
-    uploads,
-    readyNotice,
-    setReadyNotice,
-    handleFile,
-    allFilesAreValid,
-    validFileCount,
-  } = useReportUploads()
-
+function ReportUploadPanel({
+  uploads,
+  handleFile,
+  allFilesAreValid,
+  validFileCount,
+  onGenerate,
+}) {
   return (
     <section className="upload-panel" aria-labelledby="upload-title">
       <div className="panel-heading">
@@ -65,19 +61,12 @@ function ReportUploadPanel() {
           className="primary-button"
           type="button"
           disabled={!allFilesAreValid}
-          onClick={() => setReadyNotice(true)}
+          onClick={onGenerate}
         >
           Generate report
           <ArrowRight size={15} strokeWidth={2.4} aria-hidden="true" />
         </button>
       </div>
-
-      {readyNotice && (
-        <p className="ready-notice" role="status">
-          Both files are valid. Report generation will be implemented in the
-          next project stage.
-        </p>
-      )}
     </section>
   )
 }

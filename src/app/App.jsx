@@ -1,12 +1,12 @@
 import AppFooter from '../components/layout/AppFooter'
 import AppHeader from '../components/layout/AppHeader'
-import ReportUploadPanel from '../features/report-upload/components/ReportUploadPanel'
+import ReportWorkflow from '../features/report-workflow/components/ReportWorkflow'
 
 function App() {
   return (
     <main className="app-shell" id="top">
       <AppHeader />
-      <ReportUploadPanel />
+      <ReportWorkflow />
       <AppFooter />
     </main>
   )

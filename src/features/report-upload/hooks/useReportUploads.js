@@ -15,7 +15,6 @@ const createInitialUploads = () =>
 
 export function useReportUploads() {
   const [uploads, setUploads] = useState(createInitialUploads)
-  const [readyNotice, setReadyNotice] = useState(false)
   const activeRequests = useRef({})
 
   const updateUpload = useCallback((kind, nextValue) => {
@@ -24,8 +23,6 @@ export function useReportUploads() {
 
   const handleFile = useCallback(
     async (kind, file) => {
-      setReadyNotice(false)
-
       if (!file) {
         activeRequests.current[kind] = null
         updateUpload(kind, createEmptyUpload())
@@ -62,8 +59,6 @@ export function useReportUploads() {
 
   return {
     uploads,
-    readyNotice,
-    setReadyNotice,
     handleFile,
     ...summary,
   }

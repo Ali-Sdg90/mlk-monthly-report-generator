@@ -1,0 +1,1 @@
+- [ ] Add btn in upload section that uses temp data for testing and showcasing the project.

@@ -1,0 +1,76 @@
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+
+@media print {
+  html,
+  body,
+  #root {
+    width: 210mm;
+    min-width: 0;
+    margin: 0;
+    background: #fff;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .site-header,
+  .report-toolbar,
+  .report-export-error,
+  .site-footer {
+    display: none !important;
+  }
+
+  .app-shell {
+    width: 210mm;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  .report-preview,
+  .report-preview__pages {
+    display: block;
+  }
+
+  .report-preview__viewport {
+    padding: 0;
+    border-radius: 0;
+    overflow: visible;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .report-page-preview {
+    width: 210mm;
+    min-width: 210mm;
+    overflow: visible;
+  }
+
+  .report-page-preview:not(:last-child) {
+    break-after: page;
+    page-break-after: always;
+  }
+
+  .report-page-stage {
+    width: 210mm !important;
+    height: 297mm !important;
+    margin: 0;
+    box-shadow: none;
+  }
+
+  .report-page-scale {
+    width: 210mm;
+    height: 297mm;
+    transform: none !important;
+  }
+
+  .report-page {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}

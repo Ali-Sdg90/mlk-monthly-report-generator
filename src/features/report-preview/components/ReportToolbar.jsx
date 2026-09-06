@@ -1,6 +1,6 @@
 import { ArrowLeft, Download, LoaderCircle } from 'lucide-react'
 
-function ReportToolbar({ isExporting, onBack, onDownload }) {
+function ReportToolbar({ isPreparing, onBack, onPrint }) {
   return (
     <header className="report-toolbar">
       <button className="secondary-button" type="button" onClick={onBack}>
@@ -10,16 +10,19 @@ function ReportToolbar({ isExporting, onBack, onDownload }) {
 
       <div className="report-toolbar__title">
         <h2 id="report-preview-title">Report preview</h2>
-        <p>Review the page before downloading the PDF.</p>
+        <p>
+          A4 · 100% scale · no margins · headers and footers off · background
+          graphics on
+        </p>
       </div>
 
       <button
         className="primary-button"
         type="button"
-        disabled={isExporting}
-        onClick={onDownload}
+        disabled={isPreparing}
+        onClick={onPrint}
       >
-        {isExporting ? (
+        {isPreparing ? (
           <LoaderCircle
             className="button-spinner"
             size={16}
@@ -28,7 +31,7 @@ function ReportToolbar({ isExporting, onBack, onDownload }) {
         ) : (
           <Download size={16} strokeWidth={2.3} aria-hidden="true" />
         )}
-        {isExporting ? 'Creating PDF...' : 'Download PDF'}
+        {isPreparing ? 'Preparing...' : 'Save as PDF'}
       </button>
     </header>
   )

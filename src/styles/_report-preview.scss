@@ -112,34 +112,3 @@
   margin: 0 auto;
   box-shadow: 0 3px 14px rgba(0, 0, 0, 0.42);
 }
-
-.report-page-scale {
-  width: 210mm;
-  height: 297mm;
-  transform-origin: top left;
-}
-
-.report-page {
-  position: relative;
-  display: grid;
-  width: 210mm;
-  height: 297mm;
-  place-items: center;
-  color: #111;
-  background: #fff;
-}
-
-.report-page::after {
-  position: absolute;
-  inset: 2px;
-  border: 5px solid #b9b9b9;
-  content: '';
-  pointer-events: none;
-}
-
-.report-page--01 p {
-  margin: 0;
-  font-family: 'Vazirmatn Variable', sans-serif;
-  font-size: 28px;
-  font-weight: 600;
-}

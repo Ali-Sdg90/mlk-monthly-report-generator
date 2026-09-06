@@ -1,0 +1,24 @@
+.report-page-scale,
+.report-page {
+  width: 210mm;
+  height: 297mm;
+}
+
+.report-page-scale {
+  transform-origin: top left;
+}
+
+.report-page {
+  position: relative;
+  overflow: hidden;
+  color: #111;
+  background: #fff;
+}
+
+.report-page::after {
+  position: absolute;
+  inset: 2px;
+  border: 5px solid #b9b9b9;
+  content: '';
+  pointer-events: none;
+}

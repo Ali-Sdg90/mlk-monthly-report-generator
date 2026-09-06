@@ -1,49 +1,43 @@
-import { useRef, useState } from 'react'
-import ReportPage01 from '../pages/ReportPage01'
-import { exportReportToPdf } from '../services/exportReportToPdf'
-import ReportPagePreview from './ReportPagePreview'
+import { useState } from 'react'
+import { printReport } from '../services/printReport'
+import ReportDocument from './ReportDocument'
 import ReportToolbar from './ReportToolbar'
 
 function ReportPreview({ report, onBack }) {
-  const page01Ref = useRef(null)
-  const [isExporting, setIsExporting] = useState(false)
-  const [exportError, setExportError] = useState('')
+  const [isPreparing, setIsPreparing] = useState(false)
+  const [printError, setPrintError] = useState('')
 
-  const handleDownload = async () => {
-    if (!page01Ref.current || isExporting) return
+  const handlePrint = async () => {
+    if (isPreparing) return
 
-    setIsExporting(true)
-    setExportError('')
+    setIsPreparing(true)
+    setPrintError('')
 
     try {
-      await exportReportToPdf([page01Ref.current])
+      await printReport()
     } catch {
-      setExportError('The PDF could not be created. Please try again.')
+      setPrintError('The print preview could not be opened. Please try again.')
     } finally {
-      setIsExporting(false)
+      setIsPreparing(false)
     }
   }
 
   return (
     <section className="report-preview" aria-labelledby="report-preview-title">
       <ReportToolbar
-        isExporting={isExporting}
+        isPreparing={isPreparing}
         onBack={onBack}
-        onDownload={handleDownload}
+        onPrint={handlePrint}
       />
 
-      {exportError && (
+      {printError && (
         <p className="report-export-error" role="alert">
-          {exportError}
+          {printError}
         </p>
       )}
 
       <div className="report-preview__viewport">
-        <div className="report-preview__pages">
-          <ReportPagePreview>
-            <ReportPage01 ref={page01Ref} data={report.cover} />
-          </ReportPagePreview>
-        </div>
+        <ReportDocument report={report} />
       </div>
     </section>
   )

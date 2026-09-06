@@ -5,5 +5,8 @@
 @use './_upload-card.scss';
 @use './_validation.scss';
 @use './_report-preview.scss';
+@use '../features/report-preview/styles/_report-page.scss';
+@use '../features/report-preview/pages/_report-page-01.scss';
+@use '../features/report-preview/styles/_report-print.scss';
 @use './_footer.scss';
 @use './_responsive.scss';

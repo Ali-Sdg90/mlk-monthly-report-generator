@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.3.1...v1.4.0) (2026-09-06)
+
+
+### Features
+
+* add USE_SAMPLE_DATA_ON_STARTUP, start of creating the first page for the reports ([29f5e7d](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/commit/29f5e7da767794d5403b8a0c5a1366e359055d46))
+
 ## [1.3.1](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.3.0...v1.3.1) (2026-09-06)
 
 

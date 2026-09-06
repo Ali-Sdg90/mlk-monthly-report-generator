@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.3.0...v1.3.1) (2026-09-06)
+
+
+### Bug Fixes
+
+* update pdf generation method, separate each page style and component form other files ([36bedd1](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/commit/36bedd14cb765cd3eb1e672140fda9cf5e354bdd))
+
 # [1.3.0](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.2.1...v1.3.0) (2026-09-06)
 
 

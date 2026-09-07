@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.4.0...v1.5.0) (2026-09-07)
+
+
+### Features
+
+* first try to create the first page ([d3d394e](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/commit/d3d394ed9ceec968b9da20d77df7992f3bac9e94))
+
 # [1.4.0](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.3.1...v1.4.0) (2026-09-06)
 
 

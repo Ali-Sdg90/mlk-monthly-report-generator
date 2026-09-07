@@ -108,7 +108,7 @@
 
 .cover-brand img {
   width: 130px;
-  height: 138px;
+  // height: 138px;
 }
 
 .cover-heading {
@@ -186,6 +186,56 @@
   height: 100%;
   mix-blend-mode: multiply;
   filter: drop-shadow(-5px 9px 7px rgb(52 70 84 / 18%));
+}
+
+.cover-map__cities {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.cover-map__city {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  transform: translate(-50%, -50%);
+}
+
+.cover-map__dot {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgb(255 255 255 / 88%);
+  border-radius: 50%;
+  background: #087049;
+  box-shadow: 0 1px 2px rgb(7 27 55 / 28%);
+}
+
+.cover-map__label {
+  position: absolute;
+  color: #172436;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.cover-map__label--above {
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.cover-map__label--left {
+  top: 50%;
+  right: 11px;
+  transform: translateY(-50%);
+}
+
+.cover-map__label--right {
+  top: 50%;
+  left: 11px;
+  transform: translateY(-50%);
 }
 
 .cover-footer {

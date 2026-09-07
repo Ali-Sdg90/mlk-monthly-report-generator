@@ -54,6 +54,17 @@ const featureItems = [
   },
 ]
 
+const mapCities = [
+  { name: 'رشت', top: '108px', left: '206px', labelPlacement: 'above' },
+  { name: 'ساری', top: '140px', left: '288px', labelPlacement: 'above' },
+  { name: 'گرگان', top: '115px', left: '332px', labelPlacement: 'right' },
+  { name: 'کرج', top: '160px', left: '234px', labelPlacement: 'left' },
+  { name: 'تهران', top: '172px', left: '264px', labelPlacement: 'left' },
+  { name: 'مشهد', top: '163px', left: '476px', labelPlacement: 'left' },
+  { name: 'اصفهان', top: '265px', left: '266px', labelPlacement: 'right' },
+  { name: 'شیراز', top: '355px', left: '293px', labelPlacement: 'right' },
+]
+
 function ReportPage01({ data }) {
   return (
     <article
@@ -97,6 +108,18 @@ function ReportPage01({ data }) {
 
       <div className="cover-map" aria-label="نقشه ایران">
         <img src={iranRelief} alt="نقشه ایران" />
+        <div className="cover-map__cities">
+          {mapCities.map(({ name, top, left, labelPlacement }) => (
+            <div className="cover-map__city" key={name} style={{ top, left }}>
+              <span className="cover-map__dot" aria-hidden="true" />
+              <span
+                className={`cover-map__label cover-map__label--${labelPlacement}`}
+              >
+                {name}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
 
       <footer className="cover-footer">

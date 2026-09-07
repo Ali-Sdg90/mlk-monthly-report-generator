@@ -9,7 +9,7 @@ export const createReportData = ({ cities, tehran }) => {
       tehran,
     },
     cover: {
-      greeting: 'سلام',
+      period: cities.periods[0]?.label || 'تیر ۱۴۰۵',
     },
   }
 }

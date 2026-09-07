@@ -14,11 +14,3 @@
   color: #111;
   background: #fff;
 }
-
-.report-page::after {
-  position: absolute;
-  inset: 2px;
-  border: 5px solid #b9b9b9;
-  content: '';
-  pointer-events: none;
-}

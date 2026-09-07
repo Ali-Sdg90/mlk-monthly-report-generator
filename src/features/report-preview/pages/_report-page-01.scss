@@ -1,11 +1,266 @@
 .report-page--01 {
-  display: grid;
-  place-items: center;
+  --cover-navy: #071b37;
+  --cover-green: #0fbb4a;
+
+  isolation: isolate;
+  font-family: 'Vazirmatn Variable', sans-serif;
+  background:
+    radial-gradient(circle at 52% 20%, rgb(255 255 255 / 96%), transparent 36%),
+    linear-gradient(145deg, #f5f6f8 0%, #fff 45%, #f6f7f8 100%);
 }
 
-.report-page--01 p {
+.cover-decoration {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.cover-decoration--dots {
+  top: -15px;
+  right: -8px;
+  width: 235px;
+  height: 190px;
+  background-image: radial-gradient(circle, #aeb5bf 1.7px, transparent 2px);
+  background-size: 15px 15px;
+  mask-image: linear-gradient(225deg, #000 8%, transparent 78%);
+  opacity: 0.56;
+}
+
+.cover-decoration--rings {
+  top: 245px;
+  left: -220px;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: repeating-radial-gradient(
+    circle,
+    transparent 0 19px,
+    #cfd4da 20px 21px,
+    transparent 22px 40px
+  );
+  opacity: 0.55;
+}
+
+.cover-decoration--waves {
+  right: -65px;
+  bottom: 155px;
+  width: 340px;
+  height: 360px;
+  background: repeating-linear-gradient(
+    132deg,
+    transparent 0 8px,
+    rgb(222 226 230 / 34%) 9px,
+    transparent 10px 18px
+  );
+  mask-image: radial-gradient(ellipse at center, #000 0%, transparent 72%);
+  transform: skewY(-8deg);
+}
+
+.cover-status {
+  position: absolute;
+  top: 49px;
+  left: 38px;
+  width: 171px;
+  padding: 16px 12px 17px;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1;
+  text-align: center;
+  background:
+    linear-gradient(135deg, rgb(255 255 255 / 3%), transparent 42%),
+    var(--cover-navy);
+  box-shadow: 0 2px 6px rgb(7 27 55 / 18%);
+}
+
+.cover-status::after {
+  position: absolute;
+  right: 31px;
+  bottom: 10px;
+  width: 84px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cover-green));
+  content: '';
+}
+
+.cover-brand {
+  position: absolute;
+  top: 53px;
+  left: 50%;
+  display: flex;
+  width: 124px;
+  align-items: center;
+  color: var(--cover-navy);
+  flex-direction: column;
+  transform: translateX(-50%);
+}
+
+.cover-brand img {
+  width: 138px;
+  height: 97px;
+  object-fit: contain;
+}
+
+.cover-heading {
+  position: absolute;
+  top: 206px;
+  right: 52px;
+  left: 52px;
+  color: var(--cover-navy);
+  text-align: center;
+}
+
+.cover-heading h1 {
   margin: 0;
-  font-family: 'Vazirmatn Variable', sans-serif;
-  font-size: 28px;
-  font-weight: 600;
+  font-size: 66px;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1.25;
+}
+
+.cover-heading h1 span,
+.cover-heading p span {
+  display: block;
+}
+
+.cover-period {
+  display: flex;
+  width: 228px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 16px auto 0;
+  color: var(--cover-green);
+}
+
+.cover-period i {
+  width: 2px;
+  height: 25px;
+  background: var(--cover-green);
+}
+
+.cover-period strong {
+  font-size: 27px;
+  font-weight: 850;
+}
+
+.cover-heading p {
+  margin: 12px 0 0;
+  color: #182233;
+  font-size: 17px;
+  font-weight: 450;
+  line-height: 1.8;
+}
+
+.cover-map {
+  position: absolute;
+  top: 525px;
+  left: 118px;
+  width: 560px;
+  height: 430px;
+}
+
+.cover-map > img {
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: multiply;
+  object-fit: contain;
+  filter: drop-shadow(-7px 11px 8px rgb(52 70 84 / 22%));
+}
+
+.cover-footer {
+  position: absolute;
+  right: 92px;
+  bottom: 27px;
+  left: 92px;
+  color: var(--cover-navy);
+}
+
+.cover-features {
+  display: flex;
+  align-items: center;
+  direction: ltr;
+  justify-content: space-between;
+}
+
+.cover-feature {
+  position: relative;
+  display: flex;
+  min-width: 166px;
+  align-items: center;
+  direction: ltr;
+  gap: 9px;
+}
+
+.cover-feature svg {
+  width: 37px;
+  height: 37px;
+  fill: none;
+  stroke: var(--cover-navy);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+}
+
+.cover-feature svg .accent {
+  stroke: var(--cover-green);
+}
+
+.cover-feature svg .accent-fill {
+  fill: var(--cover-green);
+  stroke: none;
+}
+
+.cover-feature > div {
+  display: flex;
+  direction: rtl;
+  flex-direction: column;
+  text-align: right;
+}
+
+.cover-feature strong {
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.cover-feature div span {
+  margin-top: 1px;
+  color: #59616d;
+  font-size: 9px;
+  font-weight: 450;
+}
+
+.cover-feature__separator {
+  position: absolute;
+  top: 1px;
+  left: -25px;
+  width: 2px;
+  height: 38px;
+  background: var(--cover-green);
+  opacity: 0.72;
+}
+
+.cover-website {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 23px;
+  gap: 14px;
+  direction: ltr;
+}
+
+.cover-website span {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+}
+
+.cover-website i {
+  display: none;
+}
+
+@media print {
+  .report-page--01 {
+    print-color-adjust: exact;
+  }
 }

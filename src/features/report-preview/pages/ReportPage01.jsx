@@ -1,5 +1,5 @@
-import iranRelief from '../assets/iran-relief.png'
-import melkRadarLockup from '../assets/melkradar-lockup.svg'
+import iranRelief from '../assets/iran-white.png'
+import melkRadarLockup from '../assets/melkradar-lockup.png'
 
 const toPersianDigits = (value) =>
   String(value).replace(/\d/g, (digit) => '۰۱۲۳۴۵۶۷۸۹'[Number(digit)])
@@ -30,9 +30,8 @@ function TargetIcon() {
 function SmartDecisionIcon() {
   return (
     <svg viewBox="0 0 48 48" aria-hidden="true">
-      <path d="M6 41h37" />
-      <path d="M11 36V25h7v11M22 36V17h7v19M33 36V9h7v27" />
-      <path className="accent" d="m10 20 8-6 9 3 12-10" />
+      <path d="M8 39h32" />
+      <path d="M10 36V28h7v8M20 36V21h7v15M30 36V12h7v24" />
     </svg>
   )
 }
@@ -40,7 +39,7 @@ function SmartDecisionIcon() {
 const featureItems = [
   {
     title: 'داده‌های واقعی',
-    text: 'از آگهی‌های ملک رادار',
+    text: 'از آگهی‌های ملک‌رادار',
     Icon: DatabaseIcon,
   },
   {
@@ -68,14 +67,20 @@ function ReportPage01({ data }) {
 
       <div className="cover-status">تعلیق در بازار</div>
 
-      <div className="cover-brand" aria-label="ملک رادار">
-        <img src={melkRadarLockup} alt="ملک رادار" />
-      </div>
+      <a
+        className="cover-brand"
+        href="https://melkradar.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="مشاهده وب‌سایت ملک‌رادار"
+      >
+        <img src={melkRadarLockup} alt="ملک‌رادار" />
+      </a>
 
       <header className="cover-heading">
         <h1>
-          گزارش ماهانه
-          <span>بازار مسکن</span>
+          <span className="cover-heading__monthly">گزارش ماهانه</span>
+          <span className="cover-heading__market">بـازار مـسکـن</span>
         </h1>
 
         <div className="cover-period">
@@ -86,7 +91,7 @@ function ReportPage01({ data }) {
 
         <p>
           بررسی روند قیمت فروش، اجاره و نسبت اجاره به فروش
-          <span>در مناطق تحت پوشش ملک رادار</span>
+          <span>در مناطق تحت پوشش ملک‌رادار</span>
         </p>
       </header>
 
@@ -108,8 +113,13 @@ function ReportPage01({ data }) {
           ))}
         </div>
         <div className="cover-website">
-          <span>melkradar.com</span>
-          <i aria-hidden="true" />
+          <a
+            href="https://melkradar.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            melkradar.com
+          </a>
         </div>
       </footer>
     </article>

@@ -27,18 +27,19 @@
 }
 
 .cover-decoration--rings {
-  top: 245px;
-  left: -220px;
-  width: 420px;
-  height: 420px;
+  top: 130px;
+  left: -180px;
+  width: 300px;
+  height: 300px;
   border-radius: 50%;
   background: repeating-radial-gradient(
     circle,
-    transparent 0 19px,
-    #cfd4da 20px 21px,
-    transparent 22px 40px
+    transparent 0 10px,
+    #cfd4da 11px 12px,
+    transparent 13px 22px
   );
-  opacity: 0.55;
+  mask-image: radial-gradient(circle, #000 0%, transparent 100%);
+  opacity: 0.4;
 }
 
 .cover-decoration--waves {
@@ -58,12 +59,15 @@
 
 .cover-status {
   position: absolute;
-  top: 49px;
+  top: 51px;
   left: 38px;
-  width: 171px;
-  padding: 16px 12px 17px;
+  display: flex;
+  width: 168px;
+  height: 60px;
+  align-items: center;
+  justify-content: center;
   color: #fff;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 800;
   line-height: 1;
   text-align: center;
@@ -75,30 +79,36 @@
 
 .cover-status::after {
   position: absolute;
-  right: 31px;
-  bottom: 10px;
-  width: 84px;
+  right: 30px;
+  bottom: 12px;
+  width: 108px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--cover-green));
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--cover-green) 18%,
+    var(--cover-green) 82%,
+    transparent
+  );
   content: '';
 }
 
 .cover-brand {
   position: absolute;
-  top: 53px;
+  top: 30px;
   left: 50%;
   display: flex;
-  width: 124px;
+  width: 130px;
   align-items: center;
   color: var(--cover-navy);
   flex-direction: column;
+  text-decoration: none;
   transform: translateX(-50%);
 }
 
 .cover-brand img {
-  width: 138px;
-  height: 97px;
-  object-fit: contain;
+  width: 130px;
+  height: 138px;
 }
 
 .cover-heading {
@@ -112,23 +122,34 @@
 
 .cover-heading h1 {
   margin: 0;
-  font-size: 66px;
+  font-size: 94px;
   font-weight: 900;
   letter-spacing: 0;
-  line-height: 1.25;
+  line-height: 1.24;
 }
 
-.cover-heading h1 span,
+.cover-heading__monthly,
+.cover-heading__market,
 .cover-heading p span {
   display: block;
 }
 
+.cover-heading__monthly {
+  transform: translate(7px, 4px) scaleY(0.97);
+  transform-origin: center top;
+}
+
+.cover-heading__market {
+  transform: translateY(-7px) scale(1.04, 1.055);
+  transform-origin: center top;
+}
+
 .cover-period {
   display: flex;
-  width: 228px;
+  width: 190px;
   align-items: center;
   justify-content: space-between;
-  margin: 16px auto 0;
+  margin: 0 auto;
   color: var(--cover-green);
 }
 
@@ -149,29 +170,29 @@
   font-size: 17px;
   font-weight: 450;
   line-height: 1.8;
+  transform: scaleX(0.96);
 }
 
 .cover-map {
   position: absolute;
-  top: 525px;
-  left: 118px;
-  width: 560px;
-  height: 430px;
+  top: 522px;
+  left: 100px;
+  width: 610px;
+  height: 502px;
 }
 
 .cover-map > img {
   width: 100%;
   height: 100%;
   mix-blend-mode: multiply;
-  object-fit: contain;
-  filter: drop-shadow(-7px 11px 8px rgb(52 70 84 / 22%));
+  filter: drop-shadow(-5px 9px 7px rgb(52 70 84 / 18%));
 }
 
 .cover-footer {
   position: absolute;
-  right: 92px;
-  bottom: 27px;
-  left: 92px;
+  right: 156px;
+  bottom: 22px;
+  left: 156px;
   color: var(--cover-navy);
 }
 
@@ -180,6 +201,7 @@
   align-items: center;
   direction: ltr;
   justify-content: space-between;
+  transform: translateX(5px);
 }
 
 .cover-feature {
@@ -217,6 +239,10 @@
   text-align: right;
 }
 
+.cover-feature:last-child > div {
+  text-align: left;
+}
+
 .cover-feature strong {
   font-size: 12px;
   font-weight: 800;
@@ -229,12 +255,16 @@
   font-weight: 450;
 }
 
+.cover-feature:nth-child(2) div span {
+  text-align: left;
+}
+
 .cover-feature__separator {
   position: absolute;
-  top: 1px;
-  left: -25px;
-  width: 2px;
-  height: 38px;
+  top: 3px;
+  left: -18px;
+  width: 1.5px;
+  height: 34px;
   background: var(--cover-green);
   opacity: 0.72;
 }
@@ -244,19 +274,16 @@
   align-items: center;
   justify-content: center;
   margin-top: 23px;
-  gap: 14px;
   direction: ltr;
 }
 
-.cover-website span {
-  font-family: Arial, sans-serif;
+.cover-website a {
+  color: inherit;
+  font-family: 'Vazirmatn Variable', sans-serif;
   font-size: 16px;
-  font-weight: 800;
-  letter-spacing: -0.4px;
-}
-
-.cover-website i {
-  display: none;
+  font-weight: 650;
+  letter-spacing: -0.2px;
+  text-decoration: none;
 }
 
 @media print {

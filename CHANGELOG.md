@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.5.0...v1.5.1) (2026-09-07)
+
+
+### Bug Fixes
+
+* massively improved the first page, before adding dots in ir-map ([4376ee0](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/commit/4376ee012e2e12450f84619d4417ba43384557c4))
+
 # [1.5.0](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.4.0...v1.5.0) (2026-09-07)
 
 

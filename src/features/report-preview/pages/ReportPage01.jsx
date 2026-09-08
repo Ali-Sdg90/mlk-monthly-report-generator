@@ -76,7 +76,7 @@ function ReportPage01({ data }) {
       <div className="cover-decoration cover-decoration--rings" />
       <div className="cover-decoration cover-decoration--waves" />
 
-      <div className="cover-status">تعلیق در بازار</div>
+      <div className="cover-status">{data.title}</div>
 
       <a
         className="cover-brand"

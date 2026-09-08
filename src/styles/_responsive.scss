@@ -55,6 +55,15 @@
     width: 100%;
   }
 
+  .report-title-editor {
+    align-items: start;
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .report-title-editor__field {
+    grid-column: 1 / -1;
+  }
+
   .report-preview__viewport {
     padding: 18px 12px;
   }

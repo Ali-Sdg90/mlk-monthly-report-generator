@@ -56,6 +56,12 @@ function ReportWorkflow() {
     return () => controller.abort()
   }, [])
 
+  useEffect(() => {
+    if (step !== steps.preview) return
+
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+  }, [step])
+
   const handleGenerate = () => {
     if (!uploadState.allFilesAreValid) return
 
@@ -66,6 +72,20 @@ function ReportWorkflow() {
       }),
     )
     setStep(steps.preview)
+  }
+
+  const handleReportTitleChange = (title) => {
+    setReportData((currentReport) =>
+      currentReport
+        ? {
+            ...currentReport,
+            cover: {
+              ...currentReport.cover,
+              title,
+            },
+          }
+        : currentReport,
+    )
   }
 
   if (step === steps.loading) {
@@ -80,7 +100,11 @@ function ReportWorkflow() {
 
   if (step === steps.preview && reportData) {
     return (
-      <ReportPreview report={reportData} onBack={() => setStep(steps.upload)} />
+      <ReportPreview
+        report={reportData}
+        onBack={() => setStep(steps.upload)}
+        onTitleChange={handleReportTitleChange}
+      />
     )
   }
 

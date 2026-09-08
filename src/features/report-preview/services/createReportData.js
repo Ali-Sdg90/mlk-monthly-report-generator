@@ -137,6 +137,7 @@ export const createReportData = ({ cities, tehran }) => {
     },
     cover: {
       period: citiesSummary.currentPeriod,
+      title: 'تعلیق در بازار',
     },
     citiesSummary,
   }

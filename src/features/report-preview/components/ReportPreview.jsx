@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { printReport } from '../services/printReport'
 import ReportDocument from './ReportDocument'
+import ReportTitleEditor from './ReportTitleEditor'
 import ReportToolbar from './ReportToolbar'
 
-function ReportPreview({ report, onBack }) {
+function ReportPreview({ report, onBack, onTitleChange }) {
   const [isPreparing, setIsPreparing] = useState(false)
   const [printError, setPrintError] = useState('')
 
@@ -29,6 +30,8 @@ function ReportPreview({ report, onBack }) {
         onBack={onBack}
         onPrint={handlePrint}
       />
+
+      <ReportTitleEditor value={report.cover.title} onChange={onTitleChange} />
 
       {printError && (
         <p className="report-export-error" role="alert">

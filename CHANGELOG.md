@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.6.3...v1.7.0) (2026-09-08)
+
+
+### Features
+
+* add report-title-editor and window.scrollTo in new page ([b68c0b2](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/commit/b68c0b29248311409ec0b6ba48680e958dfd3802))
+
 ## [1.6.3](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.6.2...v1.6.3) (2026-09-08)
 
 

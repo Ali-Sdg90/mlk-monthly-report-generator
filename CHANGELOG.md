@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.6.0...v1.6.1) (2026-09-08)
+
+
+### Bug Fixes
+
+* finalize the second page ([dbac01f](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/commit/dbac01f4df3c2e0ee218805b364872df9c2a426e))
+
 # [1.6.0](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.5.2...v1.6.0) (2026-09-08)
 
 

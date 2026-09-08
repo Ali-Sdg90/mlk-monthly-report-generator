@@ -1,3 +1,10 @@
+## [1.6.3](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.6.2...v1.6.3) (2026-09-08)
+
+
+### Bug Fixes
+
+* fix validation of files and turned off test mode ([1685e04](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/commit/1685e04f89f663b4446f26e34059373ce5e9f86f))
+
 ## [1.6.2](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.6.1...v1.6.2) (2026-09-08)
 
 

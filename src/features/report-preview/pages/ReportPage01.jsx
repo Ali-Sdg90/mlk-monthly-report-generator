@@ -55,14 +55,14 @@ const featureItems = [
 ]
 
 const mapCities = [
-  { name: 'رشت', top: '108px', left: '206px', labelPlacement: 'above' },
-  { name: 'ساری', top: '140px', left: '288px', labelPlacement: 'above' },
+  { name: 'رشت', top: '110px', left: '206px', labelPlacement: 'above' },
+  { name: 'ساری', top: '138px', left: '288px', labelPlacement: 'above' },
   { name: 'گرگان', top: '115px', left: '332px', labelPlacement: 'right' },
-  { name: 'کرج', top: '160px', left: '234px', labelPlacement: 'left' },
+  { name: 'کرج', top: '160px', left: '238px', labelPlacement: 'left' },
   { name: 'تهران', top: '172px', left: '264px', labelPlacement: 'left' },
   { name: 'مشهد', top: '163px', left: '476px', labelPlacement: 'left' },
-  { name: 'اصفهان', top: '265px', left: '266px', labelPlacement: 'right' },
-  { name: 'شیراز', top: '355px', left: '293px', labelPlacement: 'right' },
+  { name: 'اصفهان', top: '262px', left: '266px', labelPlacement: 'right' },
+  { name: 'شیراز', top: '350px', left: '293px', labelPlacement: 'right' },
 ]
 
 function ReportPage01({ data }) {
@@ -143,6 +143,18 @@ function ReportPage01({ data }) {
           >
             melkradar.com
           </a>
+        </div>
+        <div className="cover-credit">
+          <span>
+            توسعه و پیاده‌سازی:{' '}
+            <a
+              href="https://www.linkedin.com/in/ali-sdg90"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              علی صادقی
+            </a>
+          </span>
         </div>
       </footer>
     </article>

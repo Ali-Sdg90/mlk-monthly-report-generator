@@ -1,3 +1,10 @@
+## [1.6.2](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.6.1...v1.6.2) (2026-09-08)
+
+
+### Bug Fixes
+
+* add developer cardie to first page and update license of the project ([dd21f1d](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/commit/dd21f1dc7d244f0d1c8e174833c387bfd3a3a023))
+
 ## [1.6.1](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.6.0...v1.6.1) (2026-09-08)
 
 

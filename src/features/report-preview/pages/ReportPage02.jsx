@@ -1,4 +1,6 @@
 import melkRadarLockup from '../assets/melkradar-lockup.webp'
+import footerLogo from '../assets/footer-logo.png'
+import keyItem from '../assets/key-item.png'
 
 const numberFormatter = new Intl.NumberFormat('fa-IR', {
   maximumFractionDigits: 0,
@@ -47,10 +49,12 @@ function MetricIcon({ type }) {
 
   if (type === 'mortgage') {
     return (
-      <svg viewBox="0 0 42 42" aria-hidden="true">
-        <circle cx="27" cy="14" r="6" />
-        <path d="M22.7 18.3 10 31m4-4 4 4m0-8 4 4" />
-      </svg>
+      <img
+        className="market-metric-heading__key"
+        src={keyItem}
+        alt=""
+        aria-hidden="true"
+      />
     )
   }
 
@@ -67,7 +71,8 @@ function GlobeIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <circle cx="12" cy="12" r="9" />
-      <path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18" />
+      <ellipse cx="12" cy="12" rx="4.2" ry="9" />
+      <path d="M3 12h18" />
     </svg>
   )
 }
@@ -275,12 +280,12 @@ function ReportPage02({ data }) {
         <i aria-hidden="true" />
         مبنای تحلیل: آگهی‌های فروش و اجاره ثبت‌شده در {
           currentPeriodLabel
-        } و {previousPeriodLabel} در دنیای ملک‌رادار.
+        } و {previousPeriodLabel} در دیتای ملک‌رادار.
       </p>
 
       <footer className="market-footer">
         <div className="market-footer__page">
-          صفحه ۲ از <span>گزارش ماهانه</span>
+          صفحه <span>۲</span> از گزارش ماهانه
         </div>
         <span className="market-footer__divider" />
         <div className="market-footer__date">
@@ -297,15 +302,14 @@ function ReportPage02({ data }) {
           <GlobeIcon />
           <span>melkradar.com</span>
         </a>
-        <div className="market-footer__brand">
-          <span className="market-footer__brand-mark" aria-hidden="true">
-            <img src={melkRadarLockup} alt="" />
-          </span>
-          <span>
-            <b>ملک رادار</b>
-            <small>MELKRADAR</small>
-          </span>
-        </div>
+        <a
+          className="market-footer__brand"
+          href="https://melkradar.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src={footerLogo} alt="ملک رادار" />
+        </a>
       </footer>
     </article>
   )

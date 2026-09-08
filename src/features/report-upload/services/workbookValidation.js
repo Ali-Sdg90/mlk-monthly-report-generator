@@ -1,8 +1,10 @@
 import readXlsxFile from 'read-excel-file/browser'
 import {
+  requiredCities,
   requiredDistricts,
   requiredHeaders,
 } from '../config/workbookRequirements'
+import { parsePeriodLabel } from '../utils/periodMetadata'
 import { normalizeHeader, normalizeText } from '../utils/textNormalization'
 import { isValidPrice, isValidRatio } from '../utils/valueParsers'
 import { parseWorkbookSheets } from './workbookParser'
@@ -10,6 +12,7 @@ import { parseWorkbookSheets } from './workbookParser'
 const buildFailedResult = (message) => ({
   valid: false,
   data: null,
+  periodKeys: [],
   sheetNames: [],
   checks: [
     { id: 'readable', label: 'فایل اکسل قابل خواندن است.', passed: false },
@@ -74,16 +77,75 @@ const validateValues = (sheetDetails) =>
     )
   })
 
+const validatePeriods = (sheets) => {
+  const periods = sheets
+    .slice(0, 2)
+    .map((sheet) => parsePeriodLabel(sheet.sheet))
+  const namesAreValid = periods.length === 2 && periods.every(Boolean)
+  const orderIsValid = namesAreValid && periods[0].order > periods[1].order
+
+  return {
+    periods,
+    checks: [
+      {
+        id: 'period-names',
+        label: 'نام دوره‌های هر دو شیت معتبر است.',
+        passed: namesAreValid,
+        detail: namesAreValid
+          ? undefined
+          : 'نام شیت باید مانند «تیر ۱۴۰۵» یا «Tir1405» باشد.',
+      },
+      {
+        id: 'period-order',
+        label: 'ترتیب شیت‌ها از دوره جدیدتر به دوره قدیمی‌تر است.',
+        passed: orderIsValid,
+        detail:
+          namesAreValid && !orderIsValid
+            ? 'شیت اول باید دوره جدیدتر و شیت دوم دوره مقایسه‌ای باشد.'
+            : undefined,
+      },
+    ],
+  }
+}
+
+const validateRequiredCities = (sheetDetails, sheetNames) => {
+  const issues = sheetDetails.flatMap((sheet, index) => {
+    const cityNames = sheet.rows.map((row) =>
+      normalizeText(row[sheet.nameIndex]),
+    )
+    const missing = []
+    const duplicates = []
+
+    requiredCities.forEach(({ label, aliases }) => {
+      const normalizedAliases = aliases.map(normalizeText)
+      const matchCount = cityNames.filter((name) =>
+        normalizedAliases.includes(name),
+      ).length
+
+      if (matchCount === 0) missing.push(label)
+      if (matchCount > 1) duplicates.push(label)
+    })
+
+    const sheetLabel = sheetNames[index] || `شیت ${index + 1}`
+    const details = []
+    if (missing.length > 0) details.push(`کمبود: ${missing.join('، ')}`)
+    if (duplicates.length > 0) {
+      details.push(`تکراری: ${duplicates.join('، ')}`)
+    }
+
+    return details.length > 0 ? `${sheetLabel}: ${details.join('؛ ')}.` : []
+  })
+
+  return {
+    label: 'اطلاعات همه شهرهای موردنیاز در هر دو دوره موجود و یکتا است.',
+    passed: issues.length === 0,
+    detail: issues.length > 0 ? issues.join(' | ') : undefined,
+  }
+}
+
 const validateCoverage = (kind, sheetDetails, sheetNames) => {
   if (kind === 'cities') {
-    return {
-      label: 'اطلاعات تهران در هر دو دوره موجود است.',
-      passed: sheetDetails.every((sheet) =>
-        sheet.rows.some((row) =>
-          normalizeText(row[sheet.nameIndex]).includes('تهران'),
-        ),
-      ),
-    }
+    return validateRequiredCities(sheetDetails, sheetNames)
   }
 
   const districtSets = sheetDetails.map((sheet) =>
@@ -123,6 +185,7 @@ export const validateSheets = (sheets, kind) => {
     .map((sheet) => sheet.sheet)
     .filter(Boolean)
   const sheetDetails = prepareSheetDetails(normalizedSheets, kind)
+  const periodValidation = validatePeriods(normalizedSheets)
   const headersComplete =
     twoSheetsFound &&
     sheetDetails.length === 2 &&
@@ -135,7 +198,7 @@ export const validateSheets = (sheets, kind) => {
     : {
         label:
           kind === 'cities'
-            ? 'اطلاعات تهران در هر دو دوره موجود است.'
+            ? 'اطلاعات همه شهرهای موردنیاز در هر دو دوره موجود و یکتا است.'
             : 'اطلاعات مناطق ۱ تا ۲۲ در هر دو دوره موجود است.',
         passed: false,
       }
@@ -154,6 +217,7 @@ export const validateSheets = (sheets, kind) => {
       label: 'ستون‌های موردنیاز در هر دو شیت موجود است.',
       passed: headersComplete,
     },
+    ...periodValidation.checks,
     {
       id: 'rows',
       label: 'هر دو شیت دارای داده هستند.',
@@ -169,6 +233,7 @@ export const validateSheets = (sheets, kind) => {
 
   return {
     valid: checks.every((check) => check.passed),
+    periodKeys: periodValidation.periods.map((period) => period?.key ?? null),
     sheetNames,
     checks,
   }

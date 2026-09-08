@@ -71,6 +71,16 @@
   background: var(--green);
 }
 
+.completion-state.has-error > span {
+  border-color: #e9bcbc;
+  color: var(--danger);
+  background: #fff0f0;
+}
+
+.completion-state.has-error strong {
+  color: var(--danger);
+}
+
 .completion-state p {
   display: grid;
   margin: 0;

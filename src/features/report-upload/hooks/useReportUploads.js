@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useRef, useState } from 'react'
 import { uploadDefinitions } from '../config/uploadDefinitions'
 import { validateWorkbook } from '../services/workbookValidation'
+import { periodKeysMatch } from '../utils/periodMetadata'
 
 const createEmptyUpload = () => ({
   file: null,
@@ -50,9 +51,20 @@ export function useReportUploads() {
     const validFileCount = values.filter(
       (upload) => upload.status === 'valid',
     ).length
+    const bothFilesPass = validFileCount === values.length
+    const periodConsistency = bothFilesPass
+      ? {
+          checked: true,
+          passed: periodKeysMatch(
+            uploads.cities.result.periodKeys,
+            uploads.tehran.result.periodKeys,
+          ),
+        }
+      : { checked: false, passed: false }
 
     return {
-      allFilesAreValid: validFileCount === values.length,
+      allFilesAreValid: bothFilesPass && periodConsistency.passed,
+      periodConsistency,
       validFileCount,
     }
   }, [uploads])

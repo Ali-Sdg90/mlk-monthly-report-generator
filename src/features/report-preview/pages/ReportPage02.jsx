@@ -6,8 +6,22 @@ const numberFormatter = new Intl.NumberFormat('fa-IR', {
   maximumFractionDigits: 0,
 })
 
+const percentagePointFormatter = new Intl.NumberFormat('fa-IR', {
+  maximumFractionDigits: 1,
+})
+
 const formatNumber = (value) =>
   Number.isFinite(value) ? numberFormatter.format(Math.round(value)) : '—'
+
+const formatChange = (value, kind) => {
+  if (!Number.isFinite(value)) return '—'
+
+  const absoluteValue = Math.abs(value)
+
+  return kind === 'ratio'
+    ? percentagePointFormatter.format(absoluteValue)
+    : formatNumber(absoluteValue)
+}
 
 const toPersianDigits = (value) =>
   String(value).replace(/\d/g, (digit) => '۰۱۲۳۴۵۶۷۸۹'[Number(digit)])
@@ -106,9 +120,7 @@ const metricHeaders = [
 
 function TrendBadge({ value, kind }) {
   const direction = directionFor(value)
-  const formattedValue = Number.isFinite(value)
-    ? formatNumber(Math.abs(value))
-    : '—'
+  const formattedValue = formatChange(value, kind)
 
   return (
     <span className={`market-trend market-trend--${direction}`}>
@@ -182,7 +194,7 @@ function Insight({ title, city, value, kind }) {
         <span>{title}</span>
         <strong>{city?.name || '—'}</strong>
         <b>
-          {formatNumber(Math.abs(value))}
+          {formatChange(value, kind)}
           {kind === 'ratio' ? ' واحد درصد' : '٪'}
           <TrendArrow direction={direction} />
         </b>

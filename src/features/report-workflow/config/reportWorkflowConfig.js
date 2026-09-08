@@ -1,1 +1,1 @@
-export const USE_SAMPLE_DATA_ON_STARTUP = true
+export const USE_SAMPLE_DATA_ON_STARTUP = false

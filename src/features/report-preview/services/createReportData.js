@@ -2,19 +2,11 @@ import {
   calculateGrowthPercent,
   calculatePercentagePointChange,
 } from './reportCalculations'
-
-const cityDefinitions = [
-  { id: 'tehran', label: 'تهران', aliases: ['تهران'] },
-  { id: 'karaj', label: 'کرج', aliases: ['کرج'] },
-  { id: 'mashhad', label: 'مشهد', aliases: ['مشهد', 'خراسان'] },
-  { id: 'shiraz', label: 'شیراز', aliases: ['شیراز'] },
-  { id: 'isfahan', label: 'اصفهان', aliases: ['اصفهان'] },
-  {
-    id: 'north',
-    label: 'شهرهای شمالی',
-    aliases: ['شهرهای شمالی', 'شهرهای شمال'],
-  },
-]
+import { requiredCities as cityDefinitions } from '../../report-upload/config/workbookRequirements'
+import {
+  getPeriodKeys,
+  periodKeysMatch,
+} from '../../report-upload/utils/periodMetadata'
 
 const persianMonths = [
   'فروردین',
@@ -37,9 +29,7 @@ const normalizeDigits = (value) =>
     .replace(/[٠-٩]/g, (digit) => '٠١٢٣٤٥٦٧٨٩'.indexOf(digit))
 
 const findCityRow = (period, aliases) =>
-  period?.rows.find((row) =>
-    aliases.some((alias) => row.name === alias || row.name.includes(alias)),
-  )
+  period?.rows.find((row) => aliases.includes(row.name))
 
 const createCityComparison = (definition, currentPeriod, previousPeriod) => {
   const current = findCityRow(currentPeriod, definition.aliases)
@@ -104,6 +94,11 @@ const createCitiesSummary = (citiesDataset) => {
   const previousPeriod = citiesDataset.periods.find(
     (period) => period.role === 'previous',
   )
+
+  if (!currentPeriod || !previousPeriod) {
+    throw new Error('Both parsed reporting periods are required.')
+  }
+
   const cities = cityDefinitions.map((definition) =>
     createCityComparison(definition, currentPeriod, previousPeriod),
   )
@@ -126,14 +121,23 @@ export const createReportData = ({ cities, tehran }) => {
     throw new Error('Both parsed datasets are required to create a report.')
   }
 
+  const citiesPeriodKeys = getPeriodKeys(cities.periods)
+  const tehranPeriodKeys = getPeriodKeys(tehran.periods)
+
+  if (!periodKeysMatch(citiesPeriodKeys, tehranPeriodKeys)) {
+    throw new Error('The reporting periods in both workbooks must match.')
+  }
+
+  const citiesSummary = createCitiesSummary(cities)
+
   return {
     datasets: {
       cities,
       tehran,
     },
     cover: {
-      period: cities.periods[0]?.label || 'تیر ۱۴۰۵',
+      period: citiesSummary.currentPeriod,
     },
-    citiesSummary: createCitiesSummary(cities),
+    citiesSummary,
   }
 }

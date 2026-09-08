@@ -1,5 +1,5 @@
-import iranRelief from '../assets/iran-white.png'
-import melkRadarLockup from '../assets/melkradar-lockup.png'
+import iranRelief from '../assets/iran-white.webp'
+import melkRadarLockup from '../assets/melkradar-lockup.webp'
 
 const toPersianDigits = (value) =>
   String(value).replace(/\d/g, (digit) => '۰۱۲۳۴۵۶۷۸۹'[Number(digit)])

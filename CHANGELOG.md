@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.7.0...v1.8.0) (2026-09-09)
+
+
+### Features
+
+* update input structure, use new input files, add formatPeriodLabel util, before start working on page 3 ([7d70d20](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/commit/7d70d20d136b100128433decc20210d6c16e011b))
+
 # [1.7.0](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.6.3...v1.7.0) (2026-09-08)
 
 

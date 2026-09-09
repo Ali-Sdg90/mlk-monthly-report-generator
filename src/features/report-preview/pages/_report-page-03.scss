@@ -13,10 +13,10 @@
 
 .tehran-brand {
   position: absolute;
-  top: 24px;
-  left: 36px;
+  top: 14px;
+  left: 18px;
   display: block;
-  width: 103px;
+  width: 94px;
   text-decoration: none;
 }
 
@@ -69,6 +69,7 @@
   margin-top: 7px;
   font-size: 21px;
   font-weight: 800;
+  letter-spacing: -0.7px;
   line-height: 1.25;
 }
 
@@ -229,7 +230,8 @@
 
 .tehran-summary-metric__value {
   display: flex;
-  min-height: 42px;
+  height: 58px;
+  min-height: 58px;
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -247,8 +249,7 @@
 .tehran-summary-metric__value b {
   font-size: 34px;
   font-weight: 900;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0;
+  letter-spacing: -1.1px;
   line-height: 1;
 }
 
@@ -258,8 +259,13 @@
   white-space: nowrap;
 }
 
-.tehran-summary-metric__value b + span:first-letter {
-  font-size: 15px;
+.tehran-summary-metric__value.is-ratio b {
+  font-size: 40px;
+}
+
+.tehran-summary-metric__value.is-ratio span {
+  font-size: 17px;
+  font-weight: 700;
 }
 
 .tehran-summary-metric__change {
@@ -345,10 +351,20 @@
 }
 
 .tehran-table-groups th:first-child {
-  border-radius: 0 8px 0 0;
+  background: transparent;
+}
+
+.tehran-district-heading {
+  display: grid;
+  width: 80px;
+  height: 40px;
+  margin: auto;
+  border-radius: 7px;
   color: #fff;
   background: var(--tehran-navy);
-  font-size: 15px;
+  font-size: 12px;
+  font-weight: 700;
+  place-items: center;
 }
 
 .tehran-table-groups small {
@@ -445,13 +461,13 @@
 
 .tehran-analysis__method {
   border-left: 1px solid #e8ecee;
-  font-size: 9px;
-  line-height: 1.55;
+  font-size: 10px;
+  line-height: 1.45;
 }
 
 .tehran-analysis__method strong {
   margin-bottom: 2px;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 800;
 }
 
@@ -469,9 +485,9 @@
 
 .tehran-analysis__insight p {
   margin: 0;
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 500;
-  line-height: 1.65;
+  line-height: 1.55;
   text-align: right;
 }
 

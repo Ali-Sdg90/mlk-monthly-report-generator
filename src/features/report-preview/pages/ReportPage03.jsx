@@ -168,7 +168,9 @@ function ReportPage03({ data }) {
         <table>
           <thead>
             <tr className="tehran-table-groups">
-              <th rowSpan="2">منطقه</th>
+              <th rowSpan="2">
+                <span className="tehran-district-heading">منطقه</span>
+              </th>
               <th colSpan="3">
                 قیمت فروش <small>(تومان / مترمربع)</small>
               </th>

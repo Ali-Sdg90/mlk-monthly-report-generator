@@ -26,10 +26,10 @@ const loadDataset = async (kind, signal) => {
 }
 
 export async function loadSampleReportData(signal) {
-  const [cities, tehran] = await Promise.all([
+  const [cities, zones] = await Promise.all([
     loadDataset('cities', signal),
-    loadDataset('tehran', signal),
+    loadDataset('zones', signal),
   ])
 
-  return createReportData({ cities, tehran })
+  return createReportData({ cities, zones })
 }

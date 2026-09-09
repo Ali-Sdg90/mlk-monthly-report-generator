@@ -1,8 +1,9 @@
 import readXlsxFile from 'read-excel-file/browser'
 import {
   requiredCities,
-  requiredDistricts,
   requiredHeaders,
+  requiredProvinces,
+  workbookColumns,
 } from '../config/workbookRequirements'
 import { parsePeriodLabel } from '../utils/periodMetadata'
 import { normalizeHeader, normalizeText } from '../utils/textNormalization'
@@ -23,8 +24,8 @@ const buildFailedResult = (message) => ({
 const findColumnIndexes = (headerRow, kind) => {
   const normalizedHeaders = headerRow.map(normalizeHeader)
   const indexes = Object.fromEntries(
-    requiredHeaders[kind].map((header) => [
-      header,
+    Object.entries(workbookColumns[kind]).map(([key, header]) => [
+      key,
       normalizedHeaders.indexOf(normalizeHeader(header)),
     ]),
   )
@@ -35,39 +36,53 @@ const findColumnIndexes = (headerRow, kind) => {
   }
 }
 
-const getDataRows = (sheet, nameIndex) =>
-  sheet.data.slice(1).filter((row) => normalizeText(row[nameIndex]).length > 0)
-
-const getDistricts = (rows, nameIndex) => {
-  const districts = new Set()
-
-  rows.forEach((row) => {
-    const match = normalizeText(row[nameIndex]).match(
-      /(?:منطقه|district)\s*(\d{1,2})/i,
+const getDataRows = (sheet, identityIndexes) =>
+  sheet.data
+    .slice(1)
+    .filter((row) =>
+      identityIndexes.every(
+        (identityIndex) => normalizeText(row[identityIndex]).length > 0,
+      ),
     )
-    const district = match ? Number(match[1]) : null
-
-    if (district && district >= 1 && district <= 22) districts.add(district)
-  })
-
-  return districts
-}
 
 const prepareSheetDetails = (sheets, kind) =>
   sheets.slice(0, 2).map((sheet) => {
     const headerRow = Array.isArray(sheet.data?.[0]) ? sheet.data[0] : []
     const columns = findColumnIndexes(headerRow, kind)
-    const nameIndex = columns.indexes[requiredHeaders[kind][0]]
-    const rows = nameIndex >= 0 ? getDataRows(sheet, nameIndex) : []
+    const identityIndexes =
+      kind === 'cities'
+        ? [columns.indexes.name]
+        : [columns.indexes.province, columns.indexes.region]
+    const rows = identityIndexes.every((index) => index >= 0)
+      ? getDataRows(sheet, identityIndexes)
+      : []
 
-    return { ...columns, nameIndex, rows }
+    return { ...columns, rows }
   })
 
-const validateValues = (sheetDetails) =>
+const hasValidMetrics = (row, indexes) =>
+  isValidPrice(row[indexes.salePrice]) &&
+  isValidPrice(row[indexes.mortgagePrice]) &&
+  isValidRatio(row[indexes.ratio])
+
+const validateValues = (sheetDetails, kind) =>
   sheetDetails.every((sheet) => {
-    const saleIndex = sheet.indexes['Sale Sqm Price']
-    const mortgageIndex = sheet.indexes['Mortg. Sqm Price']
-    const ratioIndex = sheet.indexes['Ratio (Average)']
+    if (kind === 'zones') {
+      return requiredProvinces.every(({ aliases }) => {
+        const normalizedAliases = aliases.map(normalizeText)
+
+        return sheet.rows.some(
+          (row) =>
+            normalizedAliases.includes(
+              normalizeText(row[sheet.indexes.province]),
+            ) && hasValidMetrics(row, sheet.indexes),
+        )
+      })
+    }
+
+    const saleIndex = sheet.indexes.salePrice
+    const mortgageIndex = sheet.indexes.mortgagePrice
+    const ratioIndex = sheet.indexes.ratio
 
     return sheet.rows.every(
       (row) =>
@@ -111,7 +126,7 @@ const validatePeriods = (sheets) => {
 const validateRequiredCities = (sheetDetails, sheetNames) => {
   const issues = sheetDetails.flatMap((sheet, index) => {
     const cityNames = sheet.rows.map((row) =>
-      normalizeText(row[sheet.nameIndex]),
+      normalizeText(row[sheet.indexes.name]),
     )
     const missing = []
     const duplicates = []
@@ -143,35 +158,37 @@ const validateRequiredCities = (sheetDetails, sheetNames) => {
   }
 }
 
+const validateRequiredProvinces = (sheetDetails, sheetNames) => {
+  const issues = sheetDetails.flatMap((sheet, index) => {
+    const provinceNames = new Set(
+      sheet.rows.map((row) => normalizeText(row[sheet.indexes.province])),
+    )
+    const missing = requiredProvinces
+      .filter(({ aliases }) => {
+        const normalizedAliases = aliases.map(normalizeText)
+        return !normalizedAliases.some((alias) => provinceNames.has(alias))
+      })
+      .map(({ label }) => label)
+
+    if (missing.length === 0) return []
+
+    const sheetLabel = sheetNames[index] || `شیت ${index + 1}`
+    return `${sheetLabel}: کمبود: ${missing.join('، ')}.`
+  })
+
+  return {
+    label: 'اطلاعات همه استان‌های موردنیاز در هر دو دوره موجود است.',
+    passed: issues.length === 0,
+    detail: issues.length > 0 ? issues.join(' | ') : undefined,
+  }
+}
+
 const validateCoverage = (kind, sheetDetails, sheetNames) => {
   if (kind === 'cities') {
     return validateRequiredCities(sheetDetails, sheetNames)
   }
 
-  const districtSets = sheetDetails.map((sheet) =>
-    getDistricts(sheet.rows, sheet.nameIndex),
-  )
-  const passed = districtSets.every(
-    (districts) => districts.size === requiredDistricts.length,
-  )
-  const detail = districtSets
-    .map((districts, index) => {
-      const missingDistricts = requiredDistricts.filter(
-        (district) => !districts.has(district),
-      )
-
-      return missingDistricts.length > 0
-        ? `${sheetNames[index] || `شیت ${index + 1}`}: ${missingDistricts.join('، ')}.`
-        : null
-    })
-    .filter(Boolean)
-    .join(' | ')
-
-  return {
-    label: 'اطلاعات مناطق ۱ تا ۲۲ در هر دو دوره موجود است.',
-    passed,
-    detail: passed ? undefined : detail,
-  }
+  return validateRequiredProvinces(sheetDetails, sheetNames)
 }
 
 export const validateSheets = (sheets, kind) => {
@@ -192,14 +209,14 @@ export const validateSheets = (sheets, kind) => {
     sheetDetails.every((sheet) => sheet.complete)
   const sheetsHaveData =
     headersComplete && sheetDetails.every((sheet) => sheet.rows.length > 0)
-  const valuesAreValid = sheetsHaveData && validateValues(sheetDetails)
+  const valuesAreValid = sheetsHaveData && validateValues(sheetDetails, kind)
   const coverage = headersComplete
     ? validateCoverage(kind, sheetDetails, sheetNames)
     : {
         label:
           kind === 'cities'
             ? 'اطلاعات همه شهرهای موردنیاز در هر دو دوره موجود و یکتا است.'
-            : 'اطلاعات مناطق ۱ تا ۲۲ در هر دو دوره موجود است.',
+            : 'اطلاعات همه استان‌های موردنیاز در هر دو دوره موجود است.',
         passed: false,
       }
 
@@ -225,7 +242,10 @@ export const validateSheets = (sheets, kind) => {
     },
     {
       id: 'values',
-      label: 'مقادیر قیمت و نسبت قابل پردازش هستند.',
+      label:
+        kind === 'cities'
+          ? 'مقادیر قیمت و نسبت قابل پردازش هستند.'
+          : 'برای استان‌های موردنیاز، مقادیر قیمت و نسبت قابل پردازش موجود است.',
       passed: valuesAreValid,
     },
     { id: 'coverage', ...coverage },

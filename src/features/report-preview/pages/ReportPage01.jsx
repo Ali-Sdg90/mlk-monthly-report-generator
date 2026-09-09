@@ -1,8 +1,6 @@
 import iranRelief from '../assets/iran-white.webp'
 import melkRadarLockup from '../assets/melkradar-lockup.webp'
-
-const toPersianDigits = (value) =>
-  String(value).replace(/\d/g, (digit) => '۰۱۲۳۴۵۶۷۸۹'[Number(digit)])
+import { formatPeriodLabel } from '../utils/formatPeriodLabel'
 
 function DatabaseIcon() {
   return (
@@ -96,7 +94,7 @@ function ReportPage01({ data }) {
 
         <div className="cover-period">
           <i aria-hidden="true" />
-          <strong>{toPersianDigits(data.period)}</strong>
+          <strong>{formatPeriodLabel(data.period)}</strong>
           <i aria-hidden="true" />
         </div>
 

@@ -1,6 +1,7 @@
 import melkRadarLockup from '../assets/melkradar-lockup.webp'
 import footerLogo from '../assets/footer-logo.png'
 import keyItem from '../assets/key-item.png'
+import { formatPeriodLabel, toPersianDigits } from '../utils/formatPeriodLabel'
 
 const numberFormatter = new Intl.NumberFormat('fa-IR', {
   maximumFractionDigits: 0,
@@ -22,9 +23,6 @@ const formatChange = (value, kind) => {
     ? percentagePointFormatter.format(absoluteValue)
     : formatNumber(absoluteValue)
 }
-
-const toPersianDigits = (value) =>
-  String(value).replace(/\d/g, (digit) => '۰۱۲۳۴۵۶۷۸۹'[Number(digit)])
 
 const formatPrice = (value) =>
   Number.isFinite(value) ? formatNumber(value / 1_000_000) : '—'
@@ -206,8 +204,8 @@ function Insight({ title, city, value, kind }) {
 function ReportPage02({ data }) {
   const { currentPeriod, previousPeriod, publicationDate, cities, insights } =
     data
-  const currentPeriodLabel = toPersianDigits(currentPeriod)
-  const previousPeriodLabel = toPersianDigits(previousPeriod)
+  const currentPeriodLabel = formatPeriodLabel(currentPeriod)
+  const previousPeriodLabel = formatPeriodLabel(previousPeriod)
 
   return (
     <article

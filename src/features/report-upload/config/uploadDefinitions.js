@@ -8,13 +8,13 @@ export const uploadDefinitions = {
       'اطلاعات تهران، کرج، مشهد یا خراسان، شیراز، اصفهان و شهرهای شمالی در هر دو شیت.',
     ],
   },
-  tehran: {
+  zones: {
     eyebrow: 'File 02',
-    title: 'Tehran Zones Price Analysis',
+    title: 'All Cities Zones Price Analysis',
     info: [
       'دو شیت با نام دوره معتبر؛ شیت اول دوره جدیدتر و شیت دوم دوره مقایسه‌ای.',
-      'اطلاعات مناطق ۱ تا ۲۲ تهران.',
-      'ستون‌های CityZone، Sale Sqm Price، Mortg. Sqm Price و Ratio (Average) در هر شیت.',
+      'اطلاعات استان‌های تهران، کرج، خراسان، شیراز، اصفهان و شهرهای شمالی در هر دو شیت.',
+      'ستون‌های CityTitle، CityZone، SellSqmPriceAvg (Average)، MortgageSqmAvg (Average) و Ratio (Average) در هر شیت.',
     ],
   },
 }

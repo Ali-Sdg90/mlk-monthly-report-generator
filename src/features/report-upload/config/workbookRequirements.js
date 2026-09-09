@@ -1,9 +1,25 @@
-const commonHeaders = ['Sale Sqm Price', 'Mortg. Sqm Price', 'Ratio (Average)']
-
-export const requiredHeaders = {
-  cities: ['City', ...commonHeaders],
-  tehran: ['CityZone', ...commonHeaders],
+export const workbookColumns = {
+  cities: {
+    name: 'City',
+    salePrice: 'Sale Sqm Price',
+    mortgagePrice: 'Mortg. Sqm Price',
+    ratio: 'Ratio (Average)',
+  },
+  zones: {
+    province: 'CityTitle',
+    region: 'CityZone',
+    salePrice: 'SellSqmPriceAvg (Average)',
+    mortgagePrice: 'MortgageSqmAvg (Average)',
+    ratio: 'Ratio (Average)',
+  },
 }
+
+export const requiredHeaders = Object.fromEntries(
+  Object.entries(workbookColumns).map(([kind, columns]) => [
+    kind,
+    Object.values(columns),
+  ]),
+)
 
 export const requiredCities = [
   { id: 'tehran', label: 'تهران', aliases: ['تهران'] },
@@ -18,7 +34,15 @@ export const requiredCities = [
   },
 ]
 
-export const requiredDistricts = Array.from(
-  { length: 22 },
-  (_, index) => index + 1,
-)
+export const requiredProvinces = [
+  { id: 'tehran', label: 'تهران', aliases: ['تهران'] },
+  { id: 'karaj', label: 'کرج', aliases: ['کرج'] },
+  { id: 'mashhad', label: 'خراسان', aliases: ['خراسان', 'مشهد'] },
+  { id: 'shiraz', label: 'شیراز', aliases: ['شیراز'] },
+  { id: 'isfahan', label: 'اصفهان', aliases: ['اصفهان'] },
+  {
+    id: 'north',
+    label: 'شهرهای شمالی',
+    aliases: ['شهرهای شمالی', 'شهرهای شمال'],
+  },
+]

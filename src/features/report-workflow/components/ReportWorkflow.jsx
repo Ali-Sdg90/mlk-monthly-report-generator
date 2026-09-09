@@ -68,7 +68,7 @@ function ReportWorkflow() {
     setReportData(
       createReportData({
         cities: uploadState.uploads.cities.result.data,
-        tehran: uploadState.uploads.tehran.result.data,
+        zones: uploadState.uploads.zones.result.data,
       }),
     )
     setStep(steps.preview)

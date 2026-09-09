@@ -7,21 +7,10 @@ import {
   getPeriodKeys,
   periodKeysMatch,
 } from '../../report-upload/utils/periodMetadata'
-
-const persianMonths = [
-  'فروردین',
-  'اردیبهشت',
-  'خرداد',
-  'تیر',
-  'مرداد',
-  'شهریور',
-  'مهر',
-  'آبان',
-  'آذر',
-  'دی',
-  'بهمن',
-  'اسفند',
-]
+import {
+  formatPeriodLabel,
+  persianMonthNames,
+} from '../utils/formatPeriodLabel'
 
 const normalizeDigits = (value) =>
   String(value ?? '')
@@ -72,19 +61,20 @@ const findExtreme = (cities, selector, direction = 'max') => {
 }
 
 const createPublicationDate = (periodLabel) => {
-  const normalizedLabel = normalizeDigits(periodLabel)
-  const currentMonthIndex = persianMonths.findIndex((month) =>
+  const normalizedLabel = normalizeDigits(formatPeriodLabel(periodLabel))
+  const currentMonthIndex = persianMonthNames.findIndex((month) =>
     normalizedLabel.includes(month),
   )
   const yearMatch = normalizedLabel.match(/1[34]\d{2}/)
 
   if (currentMonthIndex < 0 || !yearMatch) return periodLabel
 
-  const publicationMonthIndex = (currentMonthIndex + 1) % persianMonths.length
+  const publicationMonthIndex =
+    (currentMonthIndex + 1) % persianMonthNames.length
   const publicationYear =
     Number(yearMatch[0]) + (publicationMonthIndex === 0 ? 1 : 0)
 
-  return `${persianMonths[publicationMonthIndex]} ${publicationYear}`
+  return `${persianMonthNames[publicationMonthIndex]} ${publicationYear}`
 }
 
 const createCitiesSummary = (citiesDataset) => {
@@ -116,15 +106,15 @@ const createCitiesSummary = (citiesDataset) => {
   }
 }
 
-export const createReportData = ({ cities, tehran }) => {
-  if (!cities || !tehran) {
+export const createReportData = ({ cities, zones }) => {
+  if (!cities || !zones) {
     throw new Error('Both parsed datasets are required to create a report.')
   }
 
   const citiesPeriodKeys = getPeriodKeys(cities.periods)
-  const tehranPeriodKeys = getPeriodKeys(tehran.periods)
+  const zonesPeriodKeys = getPeriodKeys(zones.periods)
 
-  if (!periodKeysMatch(citiesPeriodKeys, tehranPeriodKeys)) {
+  if (!periodKeysMatch(citiesPeriodKeys, zonesPeriodKeys)) {
     throw new Error('The reporting periods in both workbooks must match.')
   }
 
@@ -133,7 +123,7 @@ export const createReportData = ({ cities, tehran }) => {
   return {
     datasets: {
       cities,
-      tehran,
+      zones,
     },
     cover: {
       period: citiesSummary.currentPeriod,

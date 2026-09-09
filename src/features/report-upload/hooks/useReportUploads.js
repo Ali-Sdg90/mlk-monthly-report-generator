@@ -57,7 +57,7 @@ export function useReportUploads() {
           checked: true,
           passed: periodKeysMatch(
             uploads.cities.result.periodKeys,
-            uploads.tehran.result.periodKeys,
+            uploads.zones.result.periodKeys,
           ),
         }
       : { checked: false, passed: false }

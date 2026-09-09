@@ -1,13 +1,13 @@
-import citiesUrl from '../../../../Design/files/All Cities Price Analysis Tir1404-1405.xlsx?url'
-import tehranUrl from '../../../../Design/files/Tehran Price Analysis Tir1404-1405.xlsx?url'
+import citiesUrl from '../../../../Design/files/real-files/All Cities.General.Mordad1404-1405.xlsx?url'
+import zonesUrl from '../../../../Design/files/real-files/All Citities Zones.Mordad1404-1405.xlsx?url'
 
 export const sampleWorkbookSources = {
   cities: {
-    fileName: 'All Cities Price Analysis Tir1404-1405.xlsx',
+    fileName: 'All Cities.General.Mordad1404-1405.xlsx',
     url: citiesUrl,
   },
-  tehran: {
-    fileName: 'Tehran Price Analysis Tir1404-1405.xlsx',
-    url: tehranUrl,
+  zones: {
+    fileName: 'All Citities Zones.Mordad1404-1405.xlsx',
+    url: zonesUrl,
   },
 }

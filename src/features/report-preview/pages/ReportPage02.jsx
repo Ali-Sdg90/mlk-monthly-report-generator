@@ -1,7 +1,7 @@
 import melkRadarLockup from '../assets/melkradar-lockup.webp'
-import footerLogo from '../assets/footer-logo.png'
-import keyItem from '../assets/key-item.png'
-import { formatPeriodLabel, toPersianDigits } from '../utils/formatPeriodLabel'
+import ReportFooter from '../components/ReportFooter'
+import ReportMetricIcon from '../components/ReportMetricIcon'
+import { formatPeriodLabel } from '../utils/formatPeriodLabel'
 
 const numberFormatter = new Intl.NumberFormat('fa-IR', {
   maximumFractionDigits: 0,
@@ -45,55 +45,6 @@ function TrendArrow({ direction }) {
           }
         />
       )}
-    </svg>
-  )
-}
-
-function MetricIcon({ type }) {
-  if (type === 'sale') {
-    return (
-      <svg viewBox="0 0 42 42" aria-hidden="true">
-        <path d="M10 20.5 21 11l11 9.5V33H10V20.5Z" />
-        <path d="M17.5 33V23h7v10M8 22l13-11.5L34 22" />
-      </svg>
-    )
-  }
-
-  if (type === 'mortgage') {
-    return (
-      <img
-        className="market-metric-heading__key"
-        src={keyItem}
-        alt=""
-        aria-hidden="true"
-      />
-    )
-  }
-
-  return (
-    <svg viewBox="0 0 42 42" aria-hidden="true">
-      <circle cx="13.5" cy="13.5" r="3.5" />
-      <circle cx="28.5" cy="28.5" r="3.5" />
-      <path d="m30 9-18 24" />
-    </svg>
-  )
-}
-
-function GlobeIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="12" cy="12" r="9" />
-      <ellipse cx="12" cy="12" rx="4.2" ry="9" />
-      <path d="M3 12h18" />
-    </svg>
-  )
-}
-
-function CalendarIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <rect x="3" y="5" width="18" height="16" rx="2" />
-      <path d="M7 3v4m10-4v4M3 10h18M8 14h2m4 0h2m-8 3h2m4 0h2" />
     </svg>
   )
 }
@@ -242,7 +193,7 @@ function ReportPage02({ data }) {
             key={type}
           >
             <span className="market-metric-heading__icon">
-              <MetricIcon type={type} />
+              <ReportMetricIcon type={type} />
             </span>
             <div>
               <strong>{title}</strong>
@@ -293,34 +244,7 @@ function ReportPage02({ data }) {
         } و {previousPeriodLabel} در دیتای ملک‌رادار.
       </p>
 
-      <footer className="market-footer">
-        <div className="market-footer__page">
-          صفحه <span>۲</span> از گزارش ماهانه
-        </div>
-        <span className="market-footer__divider" />
-        <div className="market-footer__date">
-          <CalendarIcon />
-          <span>تاریخ انتشار: {toPersianDigits(publicationDate)}</span>
-        </div>
-        <span className="market-footer__divider" />
-        <a
-          className="market-footer__website"
-          href="https://melkradar.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <GlobeIcon />
-          <span>melkradar.com</span>
-        </a>
-        <a
-          className="market-footer__brand"
-          href="https://melkradar.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src={footerLogo} alt="ملک رادار" />
-        </a>
-      </footer>
+      <ReportFooter pageNumber={2} publicationDate={publicationDate} />
     </article>
   )
 }

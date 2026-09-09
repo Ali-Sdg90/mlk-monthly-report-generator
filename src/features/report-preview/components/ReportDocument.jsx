@@ -1,5 +1,6 @@
 import ReportPage01 from '../pages/ReportPage01'
 import ReportPage02 from '../pages/ReportPage02'
+import ReportPage03 from '../pages/ReportPage03'
 import ReportPagePreview from './ReportPagePreview'
 
 const pageDefinitions = [
@@ -12,6 +13,11 @@ const pageDefinitions = [
     id: '02',
     Component: ReportPage02,
     selectData: (report) => report.citiesSummary,
+  },
+  {
+    id: '03',
+    Component: ReportPage03,
+    selectData: (report) => report.tehranDetails,
   },
 ]
 

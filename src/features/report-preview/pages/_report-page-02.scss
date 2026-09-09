@@ -143,7 +143,7 @@
   stroke-width: 1.45;
 }
 
-.market-metric-heading__key {
+.report-metric-icon__key {
   position: absolute;
   top: 49%;
   left: 49.5%;
@@ -510,97 +510,6 @@
   margin-left: 5px;
   border-radius: 50%;
   background: var(--market-green);
-}
-
-.market-footer {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  display: flex;
-  height: 74px;
-  align-items: center;
-  padding: 0 28px;
-  color: #fff;
-  background: var(--market-navy);
-  direction: rtl;
-  gap: 25px;
-}
-
-.market-footer svg {
-  width: 25px;
-  height: 25px;
-  fill: none;
-  stroke: currentcolor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.35;
-}
-
-.market-footer__page {
-  display: flex;
-  height: 38px;
-  align-items: center;
-  padding: 0 18px;
-  border: 1px solid #3fb98a;
-  border-radius: 8px;
-  color: #fff;
-  font-size: 11px;
-  font-weight: 650;
-  gap: 4px;
-}
-
-.market-footer__page span {
-  color: #4ed19c;
-}
-
-.market-footer__divider {
-  width: 1px;
-  height: 42px;
-  background: rgb(255 255 255 / 24%);
-}
-
-.market-footer__date,
-.market-footer__website {
-  display: flex;
-  align-items: center;
-  color: #fff;
-  direction: rtl;
-  font-size: 11px;
-  font-weight: 500;
-  gap: 8px;
-  text-decoration: none;
-}
-
-.market-footer__website {
-  direction: ltr;
-  font-family: 'Vazirmatn Variable', sans-serif;
-}
-
-.market-footer__website svg {
-  width: 23px;
-  height: 23px;
-  stroke-width: 1.25;
-}
-
-.market-footer__brand {
-  position: relative;
-  display: flex;
-  width: 100px;
-  height: 32px;
-  align-items: center;
-  margin-right: auto;
-  overflow: hidden;
-  direction: ltr;
-  text-decoration: none;
-}
-
-.market-footer__brand img {
-  position: absolute;
-  top: -18px;
-  left: -9px;
-  width: 118px;
-  max-width: none;
 }
 
 @media print {

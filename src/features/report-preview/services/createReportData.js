@@ -106,6 +106,84 @@ const createCitiesSummary = (citiesDataset) => {
   }
 }
 
+const findTehranProvince = (period) =>
+  period?.provinces?.find((province) => province.name === 'تهران')
+
+const findDistrict = (period, districtNumber) =>
+  findTehranProvince(period)?.regions.find(
+    (region) => region.districtNumber === districtNumber,
+  )
+
+const createDistrictComparison = (
+  districtNumber,
+  currentPeriod,
+  previousPeriod,
+) => {
+  const current = findDistrict(currentPeriod, districtNumber)
+  const previous = findDistrict(previousPeriod, districtNumber)
+
+  return {
+    districtNumber,
+    currentSalePrice: current?.salePrice ?? null,
+    previousSalePrice: previous?.salePrice ?? null,
+    saleGrowth: calculateGrowthPercent(current?.salePrice, previous?.salePrice),
+    currentMortgagePrice: current?.mortgagePrice ?? null,
+    previousMortgagePrice: previous?.mortgagePrice ?? null,
+    mortgageGrowth: calculateGrowthPercent(
+      current?.mortgagePrice,
+      previous?.mortgagePrice,
+    ),
+    currentRatio: current?.ratio ?? null,
+    previousRatio: previous?.ratio ?? null,
+    ratioChange: calculatePercentagePointChange(
+      current?.ratio,
+      previous?.ratio,
+    ),
+  }
+}
+
+const createTehranDetails = (zonesDataset, citiesSummary) => {
+  const currentPeriod = zonesDataset.periods.find(
+    (period) => period.role === 'current',
+  )
+  const previousPeriod = zonesDataset.periods.find(
+    (period) => period.role === 'previous',
+  )
+
+  if (!currentPeriod || !previousPeriod) {
+    throw new Error('Both parsed reporting periods are required.')
+  }
+
+  const districts = Array.from({ length: 22 }, (_, index) => index + 1).map(
+    (districtNumber) =>
+      createDistrictComparison(districtNumber, currentPeriod, previousPeriod),
+  )
+  const districtsWithSaleGrowth = districts.filter((district) =>
+    Number.isFinite(district.saleGrowth),
+  )
+  const districtsWithRatio = districts.filter((district) =>
+    Number.isFinite(district.currentRatio),
+  )
+
+  return {
+    currentPeriod: currentPeriod.label,
+    previousPeriod: previousPeriod.label,
+    publicationDate: citiesSummary.publicationDate,
+    summary: citiesSummary.cities.find((city) => city.id === 'tehran') ?? null,
+    districts,
+    insights: {
+      highestSaleGrowth:
+        findExtreme(
+          districtsWithSaleGrowth,
+          (district) => district.saleGrowth,
+        ) ?? null,
+      highestRatios: [...districtsWithRatio]
+        .sort((first, second) => second.currentRatio - first.currentRatio)
+        .slice(0, 2),
+    },
+  }
+}
+
 export const createReportData = ({ cities, zones }) => {
   if (!cities || !zones) {
     throw new Error('Both parsed datasets are required to create a report.')
@@ -119,6 +197,7 @@ export const createReportData = ({ cities, zones }) => {
   }
 
   const citiesSummary = createCitiesSummary(cities)
+  const tehranDetails = createTehranDetails(zones, citiesSummary)
 
   return {
     datasets: {
@@ -130,5 +209,6 @@ export const createReportData = ({ cities, zones }) => {
       title: 'تعلیق در بازار',
     },
     citiesSummary,
+    tehranDetails,
   }
 }

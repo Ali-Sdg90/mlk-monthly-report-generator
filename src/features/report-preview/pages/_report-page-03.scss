@@ -1,0 +1,484 @@
+.report-page--03 {
+  --tehran-navy: #061b3a;
+  --tehran-green: #10b967;
+  --tehran-red: #dc5360;
+  --tehran-muted: #68717d;
+
+  isolation: isolate;
+  font-family: 'Vazirmatn Variable', sans-serif;
+  background:
+    radial-gradient(circle at 82% 14%, rgb(241 245 247 / 72%), transparent 27%),
+    linear-gradient(145deg, #fff 0%, #fff 78%, #fafcfc 100%);
+}
+
+.tehran-brand {
+  position: absolute;
+  top: 14px;
+  left: 18px;
+  display: block;
+  width: 94px;
+  text-decoration: none;
+}
+
+.tehran-brand img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.tehran-kicker {
+  position: absolute;
+  top: 26px;
+  right: 32px;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  color: #29374a;
+  font-size: 12px;
+  font-weight: 500;
+  gap: 8px;
+}
+
+.tehran-kicker i {
+  width: 2px;
+  height: 14px;
+  border-radius: 2px;
+  background: var(--tehran-green);
+}
+
+.tehran-heading {
+  position: absolute;
+  top: 65px;
+  right: 35px;
+  z-index: 2;
+  width: 285px;
+  color: var(--tehran-navy);
+  text-align: right;
+}
+
+.tehran-heading h1 {
+  margin: 0;
+  font-size: 68px;
+  font-weight: 900;
+  letter-spacing: -2.5px;
+  line-height: 0.98;
+}
+
+.tehran-heading strong {
+  display: block;
+  margin-top: 7px;
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.7px;
+  line-height: 1.25;
+}
+
+.tehran-heading p {
+  margin: 8px 0 0;
+  color: #7b838c;
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+.tehran-map-wrap {
+  position: absolute;
+  top: 195px;
+  right: 43px;
+  display: grid;
+  width: 329px;
+  height: 205px;
+  place-items: center;
+}
+
+.tehran-district-map {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.tehran-summary {
+  position: absolute;
+  top: 143px;
+  left: 27px;
+  width: 355px;
+  height: 240px;
+  border: 1px solid #e2e7ea;
+  border-radius: 12px;
+  background: rgb(255 255 255 / 96%);
+  box-shadow: 0 2px 9px rgb(18 39 62 / 4%);
+}
+
+.tehran-summary > h2 {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  display: grid;
+  width: 132px;
+  height: 34px;
+  margin: 0;
+  border-radius: 6px;
+  color: #fff;
+  background: var(--tehran-navy);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+  place-items: center;
+  transform: translateX(-50%);
+}
+
+.tehran-summary__metrics {
+  display: grid;
+  height: 100%;
+  padding: 28px 8px 9px;
+  grid-template-columns: repeat(3, 1fr);
+  direction: rtl;
+}
+
+.tehran-summary-metric {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: var(--tehran-navy);
+  text-align: center;
+}
+
+.tehran-summary-metric:not(:last-child)::after {
+  position: absolute;
+  top: 31px;
+  bottom: 14px;
+  left: 0;
+  width: 1px;
+  background: #edf0f1;
+  content: '';
+}
+
+.tehran-summary-metric__icon {
+  display: grid;
+  width: 39px;
+  height: 39px;
+  margin-bottom: 7px;
+  border-radius: 50%;
+  color: #388d6a;
+  background: #eef8f3;
+  place-items: center;
+}
+
+.tehran-summary-metric__icon.is-mortgage {
+  position: relative;
+  overflow: hidden;
+}
+
+.tehran-summary-metric__icon.is-mortgage img {
+  position: absolute;
+  top: 49%;
+  left: 49%;
+  width: 44px;
+  max-width: none;
+  transform: translate(-50%, -50%);
+}
+
+.tehran-summary-metric__icon.is-ratio {
+  color: #478b72;
+  background: #f0f8f4;
+}
+
+.tehran-summary-metric__icon svg {
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: currentcolor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.5;
+}
+
+.tehran-summary-metric > strong {
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.tehran-summary-metric > small {
+  margin-top: 2px;
+  color: #5f6975;
+  font-size: 8px;
+  font-weight: 500;
+}
+
+.tehran-summary-metric__value {
+  display: flex;
+  height: 58px;
+  min-height: 58px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 16px;
+  direction: rtl;
+  gap: 0;
+}
+
+.tehran-summary-metric__value.is-ratio {
+  align-items: baseline;
+  flex-direction: row;
+  gap: 3px;
+}
+
+.tehran-summary-metric__value b {
+  font-size: 34px;
+  font-weight: 900;
+  letter-spacing: -1.1px;
+  line-height: 1;
+}
+
+.tehran-summary-metric__value span {
+  font-size: 9px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.tehran-summary-metric__value.is-ratio b {
+  font-size: 40px;
+}
+
+.tehran-summary-metric__value.is-ratio span {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.tehran-summary-metric__change {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  direction: rtl;
+  font-size: 11px;
+  font-weight: 700;
+  gap: 2px;
+}
+
+.tehran-summary-metric__change.is-up {
+  color: var(--tehran-green);
+}
+
+.tehran-summary-metric__change.is-down {
+  color: var(--tehran-red);
+}
+
+.tehran-summary-metric__change.is-neutral {
+  color: #79828b;
+}
+
+.tehran-summary-metric__change b {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.tehran-summary-metric__period {
+  margin-top: 5px !important;
+  color: #52606e !important;
+  font-size: 9px !important;
+}
+
+.tehran-districts {
+  position: absolute;
+  top: 400px;
+  right: 27px;
+  left: 27px;
+  height: 562px;
+  overflow: hidden;
+  border: 1px solid #dfe4e7;
+  border-radius: 11px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgb(20 42 65 / 4%);
+}
+
+.tehran-districts table {
+  width: 100%;
+  height: 100%;
+  border-collapse: collapse;
+  color: var(--tehran-navy);
+  table-layout: fixed;
+  text-align: center;
+}
+
+.tehran-districts th,
+.tehran-districts td {
+  padding: 0 3px;
+  border-left: 1px solid #eef0f2;
+  border-bottom: 1px solid #edf0f2;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.tehran-districts tr > :last-child {
+  border-left: 0;
+}
+
+.tehran-districts thead th:first-child {
+  width: 90px;
+}
+
+.tehran-table-groups {
+  height: 42px;
+}
+
+.tehran-table-groups th {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.tehran-table-groups th:first-child {
+  background: transparent;
+}
+
+.tehran-district-heading {
+  display: grid;
+  width: 80px;
+  height: 40px;
+  margin: auto;
+  border-radius: 7px;
+  color: #fff;
+  background: var(--tehran-navy);
+  font-size: 12px;
+  font-weight: 700;
+  place-items: center;
+}
+
+.tehran-table-groups small {
+  display: block;
+  margin-top: 5px;
+  color: #5f6975;
+  font-size: 8px;
+  font-weight: 500;
+}
+
+.tehran-table-periods {
+  height: 31px;
+}
+
+.tehran-table-periods th {
+  color: #27374b;
+  background: #fbfcfc;
+  font-size: 8.5px;
+  font-weight: 700;
+}
+
+.tehran-districts tbody tr {
+  height: 22px;
+}
+
+.tehran-districts tbody th {
+  font-size: 10.5px;
+  font-weight: 700;
+}
+
+.tehran-districts tbody td {
+  font-size: 10.5px;
+  font-weight: 600;
+}
+
+.tehran-table-number {
+  display: inline-block;
+  font-variant-numeric: normal;
+  letter-spacing: -0.1px;
+}
+
+.tehran-districts tbody tr:nth-child(even) {
+  background: #fcfdfd;
+}
+
+.tehran-table-change {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  direction: rtl;
+  gap: 1px;
+}
+
+.tehran-table-change.is-up {
+  color: var(--tehran-green);
+}
+
+.tehran-table-change.is-down {
+  color: var(--tehran-red);
+}
+
+.tehran-table-change.is-neutral {
+  color: #727c86;
+}
+
+.tehran-table-change b {
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.tehran-table-change small {
+  font-size: 7.5px;
+  font-weight: 600;
+}
+
+.tehran-analysis {
+  position: absolute;
+  top: 973px;
+  right: 27px;
+  left: 27px;
+  display: grid;
+  height: 67px;
+  overflow: hidden;
+  border: 1px solid #dfe4e7;
+  border-radius: 10px;
+  color: var(--tehran-navy);
+  background: #fff;
+  grid-template-columns: 0.9fr 1.65fr;
+}
+
+.tehran-analysis__method,
+.tehran-analysis__insight {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 7px 16px;
+}
+
+.tehran-analysis__method {
+  border-left: 1px solid #e8ecee;
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.tehran-analysis__method strong {
+  margin-bottom: 2px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.tehran-analysis__insight {
+  align-items: center;
+  flex-direction: row;
+  color: #425268;
+  gap: 10px;
+}
+
+.tehran-analysis__light {
+  display: block;
+  width: 31px;
+  height: 31px;
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+
+.tehran-analysis__insight p {
+  margin: 0;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.55;
+  text-align: right;
+}
+
+@media print {
+  .report-page--03 {
+    print-color-adjust: exact;
+  }
+}

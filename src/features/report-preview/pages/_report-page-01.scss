@@ -182,7 +182,7 @@
   top: 522px;
   left: 100px;
   width: 610px;
-  height: 485px;
+  height: 502px;
 }
 
 .cover-map > img {
@@ -327,7 +327,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 18px;
+  margin-top: 23px;
   direction: ltr;
 }
 
@@ -337,23 +337,6 @@
   font-size: 16px;
   font-weight: 650;
   letter-spacing: -0.2px;
-  text-decoration: none;
-}
-
-.cover-credit {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 1px;
-  color: #59616d;
-  direction: rtl;
-  font-size: 10px;
-  font-weight: 400;
-  line-height: 1.5;
-}
-
-.cover-credit a {
-  color: inherit;
   text-decoration: none;
 }
 

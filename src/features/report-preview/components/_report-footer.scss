@@ -63,10 +63,12 @@
   font-family: 'Vazirmatn Variable', sans-serif;
 }
 
-.report-footer__website svg {
+.report-footer__earth {
+  display: block;
   width: 23px;
   height: 23px;
-  stroke-width: 1.25;
+  flex: 0 0 auto;
+  object-fit: contain;
 }
 
 .report-footer__brand {

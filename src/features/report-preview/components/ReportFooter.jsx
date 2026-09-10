@@ -1,15 +1,6 @@
+import earthFooter from '../assets/earth-footer.webp'
 import footerLogo from '../assets/footer-logo.png'
 import { formatPeriodLabel, toPersianDigits } from '../utils/formatPeriodLabel'
-
-function GlobeIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="12" cy="12" r="9" />
-      <ellipse cx="12" cy="12" rx="4.2" ry="9" />
-      <path d="M3 12h18" />
-    </svg>
-  )
-}
 
 function CalendarIcon() {
   return (
@@ -38,7 +29,13 @@ function ReportFooter({ pageNumber, publicationDate }) {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <GlobeIcon />
+        <img
+          className="report-footer__earth"
+          src={earthFooter}
+          alt=""
+          aria-hidden="true"
+          draggable="false"
+        />
         <span>melkradar.com</span>
       </a>
       <a

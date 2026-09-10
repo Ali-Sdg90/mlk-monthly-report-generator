@@ -1,4 +1,5 @@
-import { ArrowDown, ArrowUp, Lightbulb, Minus } from 'lucide-react'
+import { ArrowDown, ArrowUp, Minus } from 'lucide-react'
+import insightLight from '../assets/light-page2.webp'
 import melkRadarLockup from '../assets/melkradar-lockup.webp'
 import ReportFooter from '../components/ReportFooter'
 import ReportMetricIcon from '../components/ReportMetricIcon'
@@ -103,7 +104,7 @@ function ChangeCell({ value, kind }) {
   return (
     <span className={`tehran-table-change is-${direction}`}>
       <TrendIcon value={value} />
-      <b>{formatChange(value, kind)}</b>
+      <b className="tehran-table-number">{formatChange(value, kind)}</b>
       <small>{kind === 'ratio' ? 'واحد' : '٪'}</small>
     </span>
   )
@@ -197,18 +198,42 @@ function ReportPage03({ data }) {
             {data.districts.map((district) => (
               <tr key={district.districtNumber}>
                 <th>منطقه {toPersianDigits(district.districtNumber)}</th>
-                <td>{formatPrice(district.currentSalePrice)}</td>
-                <td>{formatPrice(district.previousSalePrice)}</td>
+                <td>
+                  <span className="tehran-table-number">
+                    {formatPrice(district.currentSalePrice)}
+                  </span>
+                </td>
+                <td>
+                  <span className="tehran-table-number">
+                    {formatPrice(district.previousSalePrice)}
+                  </span>
+                </td>
                 <td>
                   <ChangeCell value={district.saleGrowth} kind="price" />
                 </td>
-                <td>{formatPrice(district.currentMortgagePrice)}</td>
-                <td>{formatPrice(district.previousMortgagePrice)}</td>
+                <td>
+                  <span className="tehran-table-number">
+                    {formatPrice(district.currentMortgagePrice)}
+                  </span>
+                </td>
+                <td>
+                  <span className="tehran-table-number">
+                    {formatPrice(district.previousMortgagePrice)}
+                  </span>
+                </td>
                 <td>
                   <ChangeCell value={district.mortgageGrowth} kind="price" />
                 </td>
-                <td>{formatRatio(district.currentRatio)}</td>
-                <td>{formatRatio(district.previousRatio)}</td>
+                <td>
+                  <span className="tehran-table-number">
+                    {formatRatio(district.currentRatio)}
+                  </span>
+                </td>
+                <td>
+                  <span className="tehran-table-number">
+                    {formatRatio(district.previousRatio)}
+                  </span>
+                </td>
                 <td>
                   <ChangeCell value={district.ratioChange} kind="ratio" />
                 </td>
@@ -227,7 +252,13 @@ function ReportPage03({ data }) {
           </span>
         </div>
         <div className="tehran-analysis__insight">
-          <Lightbulb size={31} strokeWidth={1.5} aria-hidden="true" />
+          <img
+            className="tehran-analysis__light"
+            src={insightLight}
+            alt=""
+            aria-hidden="true"
+            draggable="false"
+          />
           <p>
             منطقه {toPersianDigits(highestSaleGrowth)} بیشترین رشد قیمت فروش و
             مناطق {highestRatios.map(toPersianDigits).join(' و ')} بیشترین نسبت

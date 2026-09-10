@@ -142,18 +142,6 @@ function ReportPage01({ data }) {
             melkradar.com
           </a>
         </div>
-        <div className="cover-credit">
-          <span>
-            توسعه و پیاده‌سازی:{' '}
-            <a
-              href="https://www.linkedin.com/in/ali-sdg90"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              علی صادقی
-            </a>
-          </span>
-        </div>
       </footer>
     </article>
   )

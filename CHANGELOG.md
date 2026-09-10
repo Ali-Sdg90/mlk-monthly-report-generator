@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.9.0...v1.9.1) (2026-09-10)
+
+
+### Bug Fixes
+
+* improve loading generation func ([cc6985c](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/commit/cc6985cd8ac0014ebf5832e06c3703771cd9a421))
+
 # [1.9.0](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.8.0...v1.9.0) (2026-09-10)
 
 

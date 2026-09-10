@@ -15,7 +15,7 @@ const steps = {
   preview: 'preview',
 }
 
-const REPORT_GENERATION_DELAY_MS = 5_000
+const REPORT_GENERATION_DELAY_MS = 4_000
 
 const getErrorMessage = (error) =>
   error instanceof Error ? error.message : 'An unexpected error occurred.'

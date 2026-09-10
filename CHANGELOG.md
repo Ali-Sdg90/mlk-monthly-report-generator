@@ -1,3 +1,18 @@
+# [1.9.0](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.8.0...v1.9.0) (2026-09-10)
+
+
+### Bug Fixes
+
+* finalize the third page ([78004f7](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/commit/78004f745183aa940ba4fba3f7f114f72ae2ab00))
+* fix prettier problems ([cda967b](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/commit/cda967b2e2d722596588383e594aadb60a823634))
+* improve third page styles ([9d46a35](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/commit/9d46a3531fd77a48819f86e42dcd81e9c03d89d5))
+* re-write license and remove my name from first page, disable test mode, ready for merge ([5300637](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/commit/5300637a2c1220d9af390fb38666cf255addd251))
+
+
+### Features
+
+* first attempt to create third page styles and structure ([1a5e9f6](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/commit/1a5e9f643608ac05d25303612fb163152c5af4eb))
+
 # [1.8.0](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.7.0...v1.8.0) (2026-09-09)
 
 

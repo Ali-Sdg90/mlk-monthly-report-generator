@@ -1,3 +1,10 @@
+## [1.9.2](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.9.1...v1.9.2) (2026-09-10)
+
+
+### Bug Fixes
+
+* fix hero title text, lower the loading time ([e238adc](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/commit/e238adc2b849e6fc298df88fd71727c8903c8042))
+
 ## [1.9.1](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.9.0...v1.9.1) (2026-09-10)
 
 

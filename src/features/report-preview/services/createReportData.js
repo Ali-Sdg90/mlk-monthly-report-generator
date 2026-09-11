@@ -114,6 +114,11 @@ const findDistrict = (period, districtNumber) =>
     (region) => region.districtNumber === districtNumber,
   )
 
+const findRegion = (period, regionName) =>
+  findTehranProvince(period)?.regions.find(
+    (region) => region.region === regionName,
+  )
+
 const createDistrictComparison = (
   districtNumber,
   currentPeriod,
@@ -142,6 +147,42 @@ const createDistrictComparison = (
   }
 }
 
+const createRegionComparison = (name, currentPeriod, previousPeriod) => {
+  const current = findRegion(currentPeriod, name)
+  const previous = findRegion(previousPeriod, name)
+
+  return {
+    name,
+    currentSalePrice: current?.salePrice ?? null,
+    previousSalePrice: previous?.salePrice ?? null,
+    saleGrowth: calculateGrowthPercent(current?.salePrice, previous?.salePrice),
+    currentMortgagePrice: current?.mortgagePrice ?? null,
+    previousMortgagePrice: previous?.mortgagePrice ?? null,
+    mortgageGrowth: calculateGrowthPercent(
+      current?.mortgagePrice,
+      previous?.mortgagePrice,
+    ),
+    currentRatio: current?.ratio ?? null,
+    previousRatio: previous?.ratio ?? null,
+    ratioChange: calculatePercentagePointChange(
+      current?.ratio,
+      previous?.ratio,
+    ),
+  }
+}
+
+const getOtherRegionNames = (...periods) =>
+  Array.from(
+    new Set(
+      periods.flatMap(
+        (period) =>
+          findTehranProvince(period)
+            ?.regions.filter((region) => !region.districtNumber)
+            .map((region) => region.region) ?? [],
+      ),
+    ),
+  ).sort((first, second) => first.localeCompare(second, 'fa'))
+
 const createTehranDetails = (zonesDataset, citiesSummary) => {
   const currentPeriod = zonesDataset.periods.find(
     (period) => period.role === 'current',
@@ -158,6 +199,9 @@ const createTehranDetails = (zonesDataset, citiesSummary) => {
     (districtNumber) =>
       createDistrictComparison(districtNumber, currentPeriod, previousPeriod),
   )
+  const otherRegions = getOtherRegionNames(currentPeriod, previousPeriod).map(
+    (name) => createRegionComparison(name, currentPeriod, previousPeriod),
+  )
   const districtsWithSaleGrowth = districts.filter((district) =>
     Number.isFinite(district.saleGrowth),
   )
@@ -171,6 +215,7 @@ const createTehranDetails = (zonesDataset, citiesSummary) => {
     publicationDate: citiesSummary.publicationDate,
     summary: citiesSummary.cities.find((city) => city.id === 'tehran') ?? null,
     districts,
+    otherRegions,
     insights: {
       highestSaleGrowth:
         findExtreme(

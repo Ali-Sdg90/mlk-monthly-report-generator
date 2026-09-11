@@ -117,6 +117,18 @@ function ReportPage03({ data }) {
   const highestRatios = data.insights.highestRatios.map(
     (district) => district.districtNumber,
   )
+  const tableRows = [
+    ...data.districts.map((district) => ({
+      ...district,
+      key: `district-${district.districtNumber}`,
+      label: `منطقه ${toPersianDigits(district.districtNumber)}`,
+    })),
+    ...(data.otherRegions ?? []).map((region) => ({
+      ...region,
+      key: `region-${region.name}`,
+      label: region.name,
+    })),
+  ]
 
   return (
     <article
@@ -165,7 +177,10 @@ function ReportPage03({ data }) {
         </div>
       </section>
 
-      <section className="tehran-districts" aria-label="جدول مناطق تهران">
+      <section
+        className="tehran-districts"
+        aria-label="جدول مناطق و حومه تهران"
+      >
         <table>
           <thead>
             <tr className="tehran-table-groups">
@@ -195,47 +210,47 @@ function ReportPage03({ data }) {
             </tr>
           </thead>
           <tbody>
-            {data.districts.map((district) => (
-              <tr key={district.districtNumber}>
-                <th>منطقه {toPersianDigits(district.districtNumber)}</th>
+            {tableRows.map((region) => (
+              <tr key={region.key}>
+                <th>{region.label}</th>
                 <td>
                   <span className="tehran-table-number">
-                    {formatPrice(district.currentSalePrice)}
+                    {formatPrice(region.currentSalePrice)}
                   </span>
                 </td>
                 <td>
                   <span className="tehran-table-number">
-                    {formatPrice(district.previousSalePrice)}
+                    {formatPrice(region.previousSalePrice)}
                   </span>
                 </td>
                 <td>
-                  <ChangeCell value={district.saleGrowth} kind="price" />
+                  <ChangeCell value={region.saleGrowth} kind="price" />
                 </td>
                 <td>
                   <span className="tehran-table-number">
-                    {formatPrice(district.currentMortgagePrice)}
-                  </span>
-                </td>
-                <td>
-                  <span className="tehran-table-number">
-                    {formatPrice(district.previousMortgagePrice)}
-                  </span>
-                </td>
-                <td>
-                  <ChangeCell value={district.mortgageGrowth} kind="price" />
-                </td>
-                <td>
-                  <span className="tehran-table-number">
-                    {formatRatio(district.currentRatio)}
+                    {formatPrice(region.currentMortgagePrice)}
                   </span>
                 </td>
                 <td>
                   <span className="tehran-table-number">
-                    {formatRatio(district.previousRatio)}
+                    {formatPrice(region.previousMortgagePrice)}
                   </span>
                 </td>
                 <td>
-                  <ChangeCell value={district.ratioChange} kind="ratio" />
+                  <ChangeCell value={region.mortgageGrowth} kind="price" />
+                </td>
+                <td>
+                  <span className="tehran-table-number">
+                    {formatRatio(region.currentRatio)}
+                  </span>
+                </td>
+                <td>
+                  <span className="tehran-table-number">
+                    {formatRatio(region.previousRatio)}
+                  </span>
+                </td>
+                <td>
+                  <ChangeCell value={region.ratioChange} kind="ratio" />
                 </td>
               </tr>
             ))}

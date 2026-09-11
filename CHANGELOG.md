@@ -1,3 +1,10 @@
+## [1.9.3](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.9.2...v1.9.3) (2026-09-11)
+
+
+### Bug Fixes
+
+* add outer city item in tehran page ([4d96d10](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/commit/4d96d103c49d8075e00cfbec5ade2b40f90441bc))
+
 ## [1.9.2](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.9.1...v1.9.2) (2026-09-10)
 
 

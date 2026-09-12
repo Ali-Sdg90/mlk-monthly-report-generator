@@ -35,14 +35,25 @@ export const requiredCities = [
 ]
 
 export const requiredProvinces = [
-  { id: 'tehran', label: 'تهران', aliases: ['تهران'] },
-  { id: 'karaj', label: 'کرج', aliases: ['کرج'] },
-  { id: 'mashhad', label: 'خراسان', aliases: ['خراسان', 'مشهد'] },
-  { id: 'shiraz', label: 'شیراز', aliases: ['شیراز'] },
-  { id: 'isfahan', label: 'اصفهان', aliases: ['اصفهان'] },
+  { id: 'tehran', label: 'تهران', pageLabel: 'تهران', aliases: ['تهران'] },
+  { id: 'karaj', label: 'کرج', pageLabel: 'کرج', aliases: ['کرج'] },
+  {
+    id: 'mashhad',
+    label: 'خراسان',
+    pageLabel: 'مشهد',
+    aliases: ['خراسان', 'مشهد'],
+  },
+  { id: 'shiraz', label: 'شیراز', pageLabel: 'شیراز', aliases: ['شیراز'] },
+  {
+    id: 'isfahan',
+    label: 'اصفهان',
+    pageLabel: 'اصفهان',
+    aliases: ['اصفهان'],
+  },
   {
     id: 'north',
     label: 'شهرهای شمالی',
+    pageLabel: 'شهرهای شمالی',
     aliases: ['شهرهای شمالی', 'شهرهای شمال'],
   },
 ]

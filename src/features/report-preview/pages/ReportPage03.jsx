@@ -1,6 +1,7 @@
 import { ArrowDown, ArrowUp, Minus } from 'lucide-react'
 import insightLight from '../assets/light-page2.webp'
 import melkRadarLockup from '../assets/melkradar-lockup.webp'
+import RegionScopeGraphic from '../components/RegionScopeGraphic'
 import ReportFooter from '../components/ReportFooter'
 import ReportMetricIcon from '../components/ReportMetricIcon'
 import TehranDistrictMap from '../components/TehranDistrictMap'
@@ -99,6 +100,14 @@ function SummaryMetric({ metric, summary, previousPeriod }) {
 }
 
 function ChangeCell({ value, kind }) {
+  if (!Number.isFinite(value)) {
+    return (
+      <span className="tehran-table-change is-neutral">
+        <b className="tehran-table-number">—</b>
+      </span>
+    )
+  }
+
   const direction = directionFor(value)
 
   return (
@@ -110,13 +119,22 @@ function ChangeCell({ value, kind }) {
   )
 }
 
-function ReportPage03({ data }) {
+const getRegionLabel = (region) =>
+  region?.districtNumber
+    ? `منطقه ${toPersianDigits(region.districtNumber)}`
+    : region?.name
+
+function ReportPage03({ data, pageNumber = 3 }) {
   const currentPeriod = formatPeriodLabel(data.currentPeriod)
   const previousPeriod = formatPeriodLabel(data.previousPeriod)
-  const highestSaleGrowth = data.insights.highestSaleGrowth?.districtNumber
-  const highestRatios = data.insights.highestRatios.map(
-    (district) => district.districtNumber,
+  const highestSaleGrowth = getRegionLabel(data.insights.highestSaleGrowth)
+  const highestRatios = data.insights.highestRatios.every(
+    (region) => region.districtNumber,
   )
+    ? `مناطق ${data.insights.highestRatios
+        .map((region) => toPersianDigits(region.districtNumber))
+        .join(' و ')}`
+    : data.insights.highestRatios.map(getRegionLabel).join(' و ')
   const tableRows = [
     ...data.districts.map((district) => ({
       ...district,
@@ -129,13 +147,28 @@ function ReportPage03({ data }) {
       label: region.name,
     })),
   ]
+  const highestDistrictNumber = data.districts.at(-1)?.districtNumber
+  const regionLabel = data.districts.length > 0 ? 'منطقه' : 'استان'
+  const scopeText =
+    data.districts.length > 0
+      ? `${toPersianDigits(data.districts.length)} منطقه${
+          data.otherRegions.length > 0
+            ? ` و ${toPersianDigits(data.otherRegions.length)} ناحیه`
+            : ''
+        }`
+      : `${toPersianDigits(data.otherRegions.length)} استان`
+  const scopeLabel = highestDistrictNumber
+    ? `بررسی مناطق ${toPersianDigits(highestDistrictNumber)} گانه`
+    : 'بررسی استان‌های شمالی'
+  const isTehran = data.id === 'tehran'
+  const pageId = String(pageNumber).padStart(2, '0')
 
   return (
     <article
       className="report-page report-page--03"
-      data-report-page="03"
+      data-report-page={pageId}
       dir="rtl"
-      aria-label="گزارش مناطق تهران"
+      aria-label={`گزارش مناطق ${data.title}`}
     >
       <a
         className="tehran-brand"
@@ -151,20 +184,28 @@ function ReportPage03({ data }) {
         گزارش ماهانه بازار مسکن <i /> {currentPeriod}
       </p>
 
-      <header className="tehran-heading">
-        <h1>تهران</h1>
-        <strong>بررسی مناطق ۲۲ گانه</strong>
+      <header
+        className={`tehran-heading${data.id === 'north' ? ' is-long' : ''}`}
+      >
+        <h1>{data.title}</h1>
+        <strong>{scopeLabel}</strong>
         <p>
           مقایسه {currentPeriod} با {previousPeriod}
         </p>
       </header>
 
       <div className="tehran-map-wrap">
-        <TehranDistrictMap />
+        {isTehran ? (
+          <TehranDistrictMap />
+        ) : (
+          <RegionScopeGraphic title={data.title} scopeText={scopeText} />
+        )}
       </div>
 
-      <section className="tehran-summary" aria-label="خلاصه تهران">
-        <h2>خلاصه تهران</h2>
+      <section className="tehran-summary" aria-label={`خلاصه ${data.title}`}>
+        <h2 className={data.id === 'north' ? 'is-long' : undefined}>
+          خلاصه {data.title}
+        </h2>
         <div className="tehran-summary__metrics">
           {summaryMetrics.map((metric) => (
             <SummaryMetric
@@ -178,14 +219,15 @@ function ReportPage03({ data }) {
       </section>
 
       <section
-        className="tehran-districts"
-        aria-label="جدول مناطق و حومه تهران"
+        className={`tehran-districts${tableRows.length < 20 ? ' is-short' : ''}`}
+        aria-label={`جدول مناطق و نواحی ${data.title}`}
+        style={{ '--region-row-count': tableRows.length }}
       >
         <table>
           <thead>
             <tr className="tehran-table-groups">
               <th rowSpan="2">
-                <span className="tehran-district-heading">منطقه</span>
+                <span className="tehran-district-heading">{regionLabel}</span>
               </th>
               <th colSpan="3">
                 قیمت فروش <small>(تومان / مترمربع)</small>
@@ -275,14 +317,16 @@ function ReportPage03({ data }) {
             draggable="false"
           />
           <p>
-            منطقه {toPersianDigits(highestSaleGrowth)} بیشترین رشد قیمت فروش و
-            مناطق {highestRatios.map(toPersianDigits).join(' و ')} بیشترین نسبت
-            رهن به فروش را در {currentPeriod} تجربه کرده‌اند.
+            {highestSaleGrowth} بیشترین رشد قیمت فروش و {highestRatios} بیشترین
+            نسبت رهن به فروش را در {currentPeriod} تجربه کرده‌اند.
           </p>
         </div>
       </section>
 
-      <ReportFooter pageNumber={3} publicationDate={data.publicationDate} />
+      <ReportFooter
+        pageNumber={pageNumber}
+        publicationDate={data.publicationDate}
+      />
     </article>
   )
 }

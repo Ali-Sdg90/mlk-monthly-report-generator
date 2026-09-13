@@ -300,6 +300,12 @@
   line-height: 1;
 }
 
+.market-city-metric__value strong.is-ratio {
+  display: inline-flex;
+  align-items: baseline;
+  direction: rtl;
+}
+
 .market-city-metric__value strong span {
   margin-right: 1px;
   font-size: 17px;
@@ -484,6 +490,14 @@
   font-weight: 750;
   gap: 1px;
   white-space: nowrap;
+}
+
+.market-insight--down b {
+  color: var(--market-red);
+}
+
+.market-insight--neutral b {
+  color: #73808a;
 }
 
 .market-insight b .market-trend-arrow {

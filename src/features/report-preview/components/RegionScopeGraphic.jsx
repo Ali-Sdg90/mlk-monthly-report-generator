@@ -1,4 +1,31 @@
-function RegionScopeGraphic({ title, scopeText }) {
+import isfahanMap from '../assets/esfapan-map.png'
+import karajMap from '../assets/karaj-map.png'
+import mashhadMap from '../assets/mashhad-map.png'
+import northernMap from '../assets/northern-map.png'
+import shirazMap from '../assets/shiraz-map.png'
+
+const regionMaps = {
+  isfahan: isfahanMap,
+  karaj: karajMap,
+  mashhad: mashhadMap,
+  north: northernMap,
+  shiraz: shirazMap,
+}
+
+function RegionScopeGraphic({ regionId, title, scopeText }) {
+  const map = regionMaps[regionId]
+
+  if (map) {
+    return (
+      <img
+        className={`region-district-map region-district-map--${regionId}`}
+        src={map}
+        alt={`نقشه مناطق ${title}`}
+        draggable="false"
+      />
+    )
+  }
+
   return (
     <div className="region-scope-graphic" aria-label={`نمای کلی ${title}`}>
       <svg viewBox="0 0 280 150" aria-hidden="true">

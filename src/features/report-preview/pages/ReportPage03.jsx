@@ -194,11 +194,21 @@ function ReportPage03({ data, pageNumber = 3 }) {
         </p>
       </header>
 
-      <div className="tehran-map-wrap">
+      <div
+        className={
+          isTehran
+            ? 'tehran-map-wrap'
+            : `region-map-wrap region-map-wrap--${data.id}`
+        }
+      >
         {isTehran ? (
           <TehranDistrictMap />
         ) : (
-          <RegionScopeGraphic title={data.title} scopeText={scopeText} />
+          <RegionScopeGraphic
+            regionId={data.id}
+            title={data.title}
+            scopeText={scopeText}
+          />
         )}
       </div>
 

@@ -1,3 +1,15 @@
+# [1.10.0](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.9.3...v1.10.0) (2026-09-13)
+
+
+### Bug Fixes
+
+* add 3 remaining map image, finalize there position ([e3d5446](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/commit/e3d54467d271cdb02a46953c28030446d6f73b14))
+
+
+### Features
+
+* add other cities pages, working on creating there city map images ([d669b4a](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/commit/d669b4a456698140ad4c3a6cb5f8903513a1cafd))
+
 ## [1.9.3](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.9.2...v1.9.3) (2026-09-11)
 
 

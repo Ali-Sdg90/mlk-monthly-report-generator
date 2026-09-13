@@ -1,4 +1,4 @@
-import keyItem from '../assets/key-item.png'
+import keyItem from '../assets/key-item.webp'
 
 function ReportMetricIcon({ type }) {
   if (type === 'sale') {

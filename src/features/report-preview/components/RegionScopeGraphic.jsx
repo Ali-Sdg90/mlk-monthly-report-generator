@@ -1,8 +1,8 @@
-import isfahanMap from '../assets/esfapan-map.png'
-import karajMap from '../assets/karaj-map.png'
-import mashhadMap from '../assets/mashhad-map.png'
-import northernMap from '../assets/northern-map.png'
-import shirazMap from '../assets/shiraz-map.png'
+import isfahanMap from '../assets/esfapan-map.webp'
+import karajMap from '../assets/karaj-map.webp'
+import mashhadMap from '../assets/mashhad-map.webp'
+import northernMap from '../assets/northern-map.webp'
+import shirazMap from '../assets/shiraz-map.webp'
 
 const regionMaps = {
   isfahan: isfahanMap,

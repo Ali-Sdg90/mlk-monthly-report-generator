@@ -1,5 +1,5 @@
 import earthFooter from '../assets/earth-footer.webp'
-import footerLogo from '../assets/footer-logo.png'
+import footerLogo from '../assets/footer-logo.webp'
 import { formatPeriodLabel, toPersianDigits } from '../utils/formatPeriodLabel'
 
 function CalendarIcon() {

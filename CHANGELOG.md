@@ -1,3 +1,10 @@
+## [1.10.2](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.10.1...v1.10.2) (2026-09-13)
+
+
+### Bug Fixes
+
+* finalize styles of the report ([cb48f3a](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/commit/cb48f3a7ac055fc563507b3e0a9e7148f74a4d57))
+
 ## [1.10.1](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.10.0...v1.10.1) (2026-09-13)
 
 

@@ -84,9 +84,15 @@ function MetricValue({ value, change, kind, previousPeriod }) {
   return (
     <div className="market-city-metric">
       <div className="market-city-metric__value">
-        <strong>
-          {kind === 'ratio' ? formatRatio(value) : formatPrice(value)}
-          {kind === 'ratio' && <span>٪</span>}
+        <strong className={kind === 'ratio' ? 'is-ratio' : undefined}>
+          {kind === 'ratio' ? (
+            <>
+              <bdi>{formatRatio(value)}</bdi>
+              <span>٪</span>
+            </>
+          ) : (
+            formatPrice(value)
+          )}
         </strong>
         {kind !== 'ratio' && <span>میلیون</span>}
       </div>
@@ -133,7 +139,7 @@ function Insight({ title, city, value, kind }) {
   const direction = directionFor(value)
 
   return (
-    <div className="market-insight">
+    <div className={`market-insight market-insight--${direction}`}>
       <div
         className={`market-insight__arrow market-insight__arrow--${direction}`}
       >

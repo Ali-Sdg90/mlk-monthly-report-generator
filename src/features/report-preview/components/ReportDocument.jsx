@@ -14,11 +14,6 @@ const pageDefinitions = [
     Component: ReportPage02,
     selectData: (report) => report.citiesSummary,
   },
-  {
-    id: '03',
-    Component: ReportPage03,
-    selectData: (report) => report.tehranDetails,
-  },
 ]
 
 function ReportDocument({ report }) {
@@ -29,6 +24,15 @@ function ReportDocument({ report }) {
           <Component data={selectData?.(report)} />
         </ReportPagePreview>
       ))}
+      {report.regionDetails.map((region, index) => {
+        const pageNumber = index + 3
+
+        return (
+          <ReportPagePreview key={region.id}>
+            <ReportPage03 data={region} pageNumber={pageNumber} />
+          </ReportPagePreview>
+        )
+      })}
     </div>
   )
 }

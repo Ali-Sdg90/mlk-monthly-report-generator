@@ -19,7 +19,7 @@ const extractDistrictNumber = (name) => {
   const match = normalizeText(name).match(/(?:منطقه|district)\s*(\d{1,2})/i)
   const districtNumber = match ? Number(match[1]) : null
 
-  return districtNumber >= 1 && districtNumber <= 22 ? districtNumber : null
+  return districtNumber >= 1 ? districtNumber : null
 }
 
 const parseMetrics = (row, indexes) => ({

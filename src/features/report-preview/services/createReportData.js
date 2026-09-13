@@ -2,7 +2,10 @@ import {
   calculateGrowthPercent,
   calculatePercentagePointChange,
 } from './reportCalculations'
-import { requiredCities as cityDefinitions } from '../../report-upload/config/workbookRequirements'
+import {
+  requiredCities as cityDefinitions,
+  requiredProvinces as regionDefinitions,
+} from '../../report-upload/config/workbookRequirements'
 import {
   getPeriodKeys,
   periodKeysMatch,
@@ -106,16 +109,16 @@ const createCitiesSummary = (citiesDataset) => {
   }
 }
 
-const findTehranProvince = (period) =>
-  period?.provinces?.find((province) => province.name === 'تهران')
+const findProvince = (period, aliases) =>
+  period?.provinces?.find((province) => aliases.includes(province.name))
 
-const findDistrict = (period, districtNumber) =>
-  findTehranProvince(period)?.regions.find(
+const findDistrict = (period, aliases, districtNumber) =>
+  findProvince(period, aliases)?.regions.find(
     (region) => region.districtNumber === districtNumber,
   )
 
-const findRegion = (period, regionName) =>
-  findTehranProvince(period)?.regions.find(
+const findRegion = (period, aliases, regionName) =>
+  findProvince(period, aliases)?.regions.find(
     (region) => region.region === regionName,
   )
 
@@ -123,9 +126,10 @@ const createDistrictComparison = (
   districtNumber,
   currentPeriod,
   previousPeriod,
+  provinceAliases,
 ) => {
-  const current = findDistrict(currentPeriod, districtNumber)
-  const previous = findDistrict(previousPeriod, districtNumber)
+  const current = findDistrict(currentPeriod, provinceAliases, districtNumber)
+  const previous = findDistrict(previousPeriod, provinceAliases, districtNumber)
 
   return {
     districtNumber,
@@ -147,9 +151,14 @@ const createDistrictComparison = (
   }
 }
 
-const createRegionComparison = (name, currentPeriod, previousPeriod) => {
-  const current = findRegion(currentPeriod, name)
-  const previous = findRegion(previousPeriod, name)
+const createRegionComparison = (
+  name,
+  currentPeriod,
+  previousPeriod,
+  provinceAliases,
+) => {
+  const current = findRegion(currentPeriod, provinceAliases, name)
+  const previous = findRegion(previousPeriod, provinceAliases, name)
 
   return {
     name,
@@ -171,19 +180,31 @@ const createRegionComparison = (name, currentPeriod, previousPeriod) => {
   }
 }
 
-const getOtherRegionNames = (...periods) =>
+const getDistrictNumbers = (provinceAliases, ...periods) =>
   Array.from(
     new Set(
       periods.flatMap(
         (period) =>
-          findTehranProvince(period)
+          findProvince(period, provinceAliases)
+            ?.regions.filter((region) => region.districtNumber)
+            .map((region) => region.districtNumber) ?? [],
+      ),
+    ),
+  ).sort((first, second) => first - second)
+
+const getOtherRegionNames = (provinceAliases, ...periods) =>
+  Array.from(
+    new Set(
+      periods.flatMap(
+        (period) =>
+          findProvince(period, provinceAliases)
             ?.regions.filter((region) => !region.districtNumber)
             .map((region) => region.region) ?? [],
       ),
     ),
   ).sort((first, second) => first.localeCompare(second, 'fa'))
 
-const createTehranDetails = (zonesDataset, citiesSummary) => {
+const createRegionDetails = (definition, zonesDataset, citiesSummary) => {
   const currentPeriod = zonesDataset.periods.find(
     (period) => period.role === 'current',
   )
@@ -195,34 +216,53 @@ const createTehranDetails = (zonesDataset, citiesSummary) => {
     throw new Error('Both parsed reporting periods are required.')
   }
 
-  const districts = Array.from({ length: 22 }, (_, index) => index + 1).map(
-    (districtNumber) =>
-      createDistrictComparison(districtNumber, currentPeriod, previousPeriod),
+  const districts = getDistrictNumbers(
+    definition.aliases,
+    currentPeriod,
+    previousPeriod,
+  ).map((districtNumber) =>
+    createDistrictComparison(
+      districtNumber,
+      currentPeriod,
+      previousPeriod,
+      definition.aliases,
+    ),
   )
-  const otherRegions = getOtherRegionNames(currentPeriod, previousPeriod).map(
-    (name) => createRegionComparison(name, currentPeriod, previousPeriod),
+  const otherRegions = getOtherRegionNames(
+    definition.aliases,
+    currentPeriod,
+    previousPeriod,
+  ).map((name) =>
+    createRegionComparison(
+      name,
+      currentPeriod,
+      previousPeriod,
+      definition.aliases,
+    ),
   )
-  const districtsWithSaleGrowth = districts.filter((district) =>
-    Number.isFinite(district.saleGrowth),
+  const insightCandidates = districts.length > 0 ? districts : otherRegions
+  const regionsWithSaleGrowth = insightCandidates.filter((region) =>
+    Number.isFinite(region.saleGrowth),
   )
-  const districtsWithRatio = districts.filter((district) =>
-    Number.isFinite(district.currentRatio),
+  const regionsWithRatio = insightCandidates.filter((region) =>
+    Number.isFinite(region.currentRatio),
   )
 
   return {
+    id: definition.id,
+    title: definition.pageLabel,
     currentPeriod: currentPeriod.label,
     previousPeriod: previousPeriod.label,
     publicationDate: citiesSummary.publicationDate,
-    summary: citiesSummary.cities.find((city) => city.id === 'tehran') ?? null,
+    summary:
+      citiesSummary.cities.find((city) => city.id === definition.id) ?? null,
     districts,
     otherRegions,
     insights: {
       highestSaleGrowth:
-        findExtreme(
-          districtsWithSaleGrowth,
-          (district) => district.saleGrowth,
-        ) ?? null,
-      highestRatios: [...districtsWithRatio]
+        findExtreme(regionsWithSaleGrowth, (region) => region.saleGrowth) ??
+        null,
+      highestRatios: [...regionsWithRatio]
         .sort((first, second) => second.currentRatio - first.currentRatio)
         .slice(0, 2),
     },
@@ -242,7 +282,9 @@ export const createReportData = ({ cities, zones }) => {
   }
 
   const citiesSummary = createCitiesSummary(cities)
-  const tehranDetails = createTehranDetails(zones, citiesSummary)
+  const regionDetails = regionDefinitions.map((definition) =>
+    createRegionDetails(definition, zones, citiesSummary),
+  )
 
   return {
     datasets: {
@@ -254,6 +296,7 @@ export const createReportData = ({ cities, zones }) => {
       title: 'تعلیق در بازار',
     },
     citiesSummary,
-    tehranDetails,
+    regionDetails,
+    tehranDetails: regionDetails[0],
   }
 }

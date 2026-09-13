@@ -61,6 +61,11 @@
 .report-footer__website {
   direction: ltr;
   font-family: 'Vazirmatn Variable', sans-serif;
+
+  span {
+    position: relative;
+    top: 1px;
+  }
 }
 
 .report-footer__earth {

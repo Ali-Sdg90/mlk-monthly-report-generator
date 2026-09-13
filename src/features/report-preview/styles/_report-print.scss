@@ -48,8 +48,11 @@
 
   .report-page-preview {
     width: 210mm;
+    height: 297mm;
     min-width: 210mm;
     overflow: visible;
+    break-inside: avoid;
+    page-break-inside: avoid;
   }
 
   .report-page-preview:not(:last-child) {
@@ -71,6 +74,8 @@
   }
 
   .report-page {
+    width: 210mm;
+    height: 297mm;
     break-inside: avoid;
     page-break-inside: avoid;
   }

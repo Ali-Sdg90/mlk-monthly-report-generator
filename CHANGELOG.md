@@ -1,3 +1,10 @@
+## [1.10.1](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.10.0...v1.10.1) (2026-09-13)
+
+
+### Bug Fixes
+
+* use webp for project assets and move old assets in png folder ([42dbb92](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/commit/42dbb920d1cc6be6d3c779a663a417fcdcdba6e7))
+
 # [1.10.0](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.9.3...v1.10.0) (2026-09-13)
 
 

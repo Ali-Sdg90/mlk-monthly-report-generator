@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.10.2...v1.11.0) (2026-09-21)
+
+
+### Features
+
+* add about report page, update tehran-analysis__method text ([297418f](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/commit/297418fdf4ed0b2b97e8b2c32761a47fef4882db))
+
 ## [1.10.2](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.10.1...v1.10.2) (2026-09-13)
 
 

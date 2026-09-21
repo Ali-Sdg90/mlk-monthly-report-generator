@@ -6,31 +6,12 @@ import ReportFooter from '../components/ReportFooter'
 import ReportMetricIcon from '../components/ReportMetricIcon'
 import TehranDistrictMap from '../components/TehranDistrictMap'
 import { formatPeriodLabel, toPersianDigits } from '../utils/formatPeriodLabel'
-
-const numberFormatter = new Intl.NumberFormat('fa-IR', {
-  maximumFractionDigits: 0,
-})
-
-const decimalFormatter = new Intl.NumberFormat('fa-IR', {
-  maximumFractionDigits: 1,
-})
-
-const formatPrice = (value) =>
-  Number.isFinite(value) ? numberFormatter.format(value / 1_000_000) : '—'
-
-const formatRatio = (value) =>
-  Number.isFinite(value) ? numberFormatter.format(value * 100) : '—'
-
-const formatChange = (value, kind) => {
-  if (!Number.isFinite(value)) return '—'
-
-  return kind === 'ratio'
-    ? decimalFormatter.format(Math.abs(value))
-    : numberFormatter.format(Math.abs(value))
-}
-
-const directionFor = (value) =>
-  value > 0 ? 'up' : value < 0 ? 'down' : 'neutral'
+import {
+  directionFor,
+  formatChange,
+  formatPrice,
+  formatRatio,
+} from '../utils/formatRegionMetrics'
 
 function TrendIcon({ value }) {
   const direction = directionFor(value)
@@ -124,17 +105,41 @@ const getRegionLabel = (region) =>
     ? `منطقه ${toPersianDigits(region.districtNumber)}`
     : region?.name
 
+const getRegionListLabel = (regions) => {
+  if (regions.length === 0) return null
+  if (regions.length === 1) return getRegionLabel(regions[0])
+
+  const districts = regions.filter((region) => region.districtNumber)
+  const otherRegions = regions.filter((region) => !region.districtNumber)
+  const districtLabel =
+    districts.length > 1
+      ? `مناطق ${districts
+          .map((region) => toPersianDigits(region.districtNumber))
+          .join(' و ')}`
+      : districts.length === 1
+        ? getRegionLabel(districts[0])
+        : null
+
+  return [districtLabel, ...otherRegions.map(getRegionLabel)]
+    .filter(Boolean)
+    .join(' و ')
+}
+
 function ReportPage03({ data, pageNumber = 3 }) {
   const currentPeriod = formatPeriodLabel(data.currentPeriod)
   const previousPeriod = formatPeriodLabel(data.previousPeriod)
-  const highestSaleGrowth = getRegionLabel(data.insights.highestSaleGrowth)
-  const highestRatios = data.insights.highestRatios.every(
-    (region) => region.districtNumber,
-  )
-    ? `مناطق ${data.insights.highestRatios
-        .map((region) => toPersianDigits(region.districtNumber))
-        .join(' و ')}`
-    : data.insights.highestRatios.map(getRegionLabel).join(' و ')
+  const highestSaleGrowth = getRegionListLabel(data.insights.highestSaleGrowth)
+  const highestRatios = getRegionListLabel(data.insights.highestRatios)
+  const insightParts = [
+    highestSaleGrowth && `${highestSaleGrowth} بیشترین رشد قیمت فروش`,
+    highestRatios && `${highestRatios} بیشترین نسبت رهن به فروش`,
+  ].filter(Boolean)
+  const insightRegionCount = new Set([
+    ...data.insights.highestSaleGrowth,
+    ...data.insights.highestRatios,
+  ]).size
+  const insightVerb =
+    insightRegionCount === 1 ? 'تجربه کرده است' : 'تجربه کرده‌اند'
   const tableRows = [
     ...data.districts.map((district) => ({
       ...district,
@@ -327,8 +332,9 @@ function ReportPage03({ data, pageNumber = 3 }) {
             draggable="false"
           />
           <p>
-            {highestSaleGrowth} بیشترین رشد قیمت فروش و {highestRatios} بیشترین
-            نسبت رهن به فروش را در {currentPeriod} تجربه کرده‌اند.
+            {insightParts.length > 0
+              ? `${insightParts.join(' و ')} را در ${currentPeriod} ${insightVerb}.`
+              : `داده‌ای برای تعیین بیشترین رشد قیمت فروش و نسبت رهن به فروش در ${currentPeriod} موجود نیست.`}
           </p>
         </div>
       </section>

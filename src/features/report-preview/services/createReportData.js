@@ -14,6 +14,11 @@ import {
   formatPeriodLabel,
   persianMonthNames,
 } from '../utils/formatPeriodLabel'
+import {
+  directionFor,
+  formatChange,
+  formatRatio,
+} from '../utils/formatRegionMetrics'
 
 const normalizeDigits = (value) =>
   String(value ?? '')
@@ -60,6 +65,29 @@ const findExtreme = (cities, selector, direction = 'max') => {
       : cityValue > selectedValue
         ? city
         : selected
+  })
+}
+
+const findDisplayedLeaders = (
+  regions,
+  selector,
+  formatValue,
+  showDirection,
+) => {
+  const highest = findExtreme(regions, selector)
+  if (!highest) return []
+
+  const highestValue = selector(highest)
+  const displayedValue = formatValue(highestValue)
+
+  return regions.filter((region) => {
+    const value = selector(region)
+
+    return (
+      Number.isFinite(value) &&
+      formatValue(value) === displayedValue &&
+      (!showDirection || directionFor(value) === directionFor(highestValue))
+    )
   })
 }
 
@@ -240,13 +268,7 @@ const createRegionDetails = (definition, zonesDataset, citiesSummary) => {
       definition.aliases,
     ),
   )
-  const insightCandidates = districts.length > 0 ? districts : otherRegions
-  const regionsWithSaleGrowth = insightCandidates.filter((region) =>
-    Number.isFinite(region.saleGrowth),
-  )
-  const regionsWithRatio = insightCandidates.filter((region) =>
-    Number.isFinite(region.currentRatio),
-  )
+  const insightCandidates = [...districts, ...otherRegions]
 
   return {
     id: definition.id,
@@ -259,12 +281,17 @@ const createRegionDetails = (definition, zonesDataset, citiesSummary) => {
     districts,
     otherRegions,
     insights: {
-      highestSaleGrowth:
-        findExtreme(regionsWithSaleGrowth, (region) => region.saleGrowth) ??
-        null,
-      highestRatios: [...regionsWithRatio]
-        .sort((first, second) => second.currentRatio - first.currentRatio)
-        .slice(0, 2),
+      highestSaleGrowth: findDisplayedLeaders(
+        insightCandidates,
+        (region) => region.saleGrowth,
+        (value) => formatChange(value, 'price'),
+        true,
+      ),
+      highestRatios: findDisplayedLeaders(
+        insightCandidates,
+        (region) => region.currentRatio,
+        formatRatio,
+      ),
     },
   }
 }

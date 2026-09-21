@@ -1,3 +1,10 @@
+## [1.11.1](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.11.0...v1.11.1) (2026-09-21)
+
+
+### Bug Fixes
+
+* update mashhad map ([4ea9488](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/commit/4ea94885721d472b238921757058fadd21c462fc))
+
 # [1.11.0](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.10.2...v1.11.0) (2026-09-21)
 
 

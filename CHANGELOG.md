@@ -1,3 +1,10 @@
+## [1.11.2](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.11.1...v1.11.2) (2026-09-21)
+
+
+### Bug Fixes
+
+* update analysis insight functionality and calculations ([78d8f58](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/commit/78d8f5877c68d19d8ed87f72f04fcac85e3e2c93))
+
 ## [1.11.1](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.11.0...v1.11.1) (2026-09-21)
 
 

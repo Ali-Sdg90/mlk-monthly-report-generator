@@ -1,6 +1,6 @@
 import isfahanMap from '../assets/esfapan-map.webp'
 import karajMap from '../assets/karaj-map.webp'
-import mashhadMap from '../assets/mashhad-map.webp'
+import mashhadMap from '../assets/mashhad-map-old.webp'
 import northernMap from '../assets/northern-map.webp'
 import shirazMap from '../assets/shiraz-map.webp'
 

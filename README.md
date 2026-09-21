@@ -12,7 +12,7 @@ Turn monthly MelkRadar Excel data into a validated, print-ready housing market r
 
 This internal React application validates two monthly XLSX workbooks and turns their housing-market data into a fixed A4 RTL report that can be printed or saved as PDF.
 
-The current report contains a cover, a city summary, and regional pages for Tehran, Karaj, Mashhad, Shiraz, Isfahan, and Northern Cities.
+The current report contains a cover, an About page, a city summary, and regional pages for Tehran, Karaj, Mashhad, Shiraz, Isfahan, and Northern Cities.
 
 Designed and developed by **Ali Sadeghi** for **MelkRadar**.
 

@@ -1,3 +1,5 @@
+import { parsePeriodLabel } from '../../report-upload/utils/periodMetadata'
+
 const monthNames = {
   farvardin: 'فروردین',
   ordibehesht: 'اردیبهشت',
@@ -31,4 +33,14 @@ export const formatPeriodLabel = (value) => {
     : label
 
   return toPersianDigits(localizedLabel.replace(persianMonthPattern, '$1 '))
+}
+
+export const formatReportFileName = (periodLabel) => {
+  const period = parsePeriodLabel(periodLabel)
+  const prefix = 'MelkRadar.BazarMaskan.MonthlyReport'
+
+  if (!period) return prefix
+
+  const month = Object.keys(monthNames)[period.month - 1]
+  return `${prefix}.${month[0].toUpperCase()}${month.slice(1)}${period.year}`
 }

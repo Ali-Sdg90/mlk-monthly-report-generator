@@ -167,7 +167,7 @@ function ReportPage02({ data }) {
   return (
     <article
       className="report-page report-page--02"
-      data-report-page="02"
+      data-report-page="03"
       dir="rtl"
       aria-label="گزارش نبض بازار مسکن"
     >
@@ -247,10 +247,10 @@ function ReportPage02({ data }) {
         <i aria-hidden="true" />
         مبنای تحلیل: آگهی‌های فروش و اجاره ثبت‌شده در {
           currentPeriodLabel
-        } و {previousPeriodLabel} در دیتای ملک‌رادار.
+        } و {previousPeriodLabel} براساس دیتای ملک‌رادار.
       </p>
 
-      <ReportFooter pageNumber={2} publicationDate={publicationDate} />
+      <ReportFooter pageNumber={3} publicationDate={publicationDate} />
     </article>
   )
 }

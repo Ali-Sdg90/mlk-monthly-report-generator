@@ -1,4 +1,5 @@
 import ReportPage01 from '../pages/ReportPage01'
+import ReportAboutPage from '../pages/ReportAboutPage'
 import ReportPage02 from '../pages/ReportPage02'
 import ReportPage03 from '../pages/ReportPage03'
 import ReportPagePreview from './ReportPagePreview'
@@ -11,6 +12,11 @@ const pageDefinitions = [
   },
   {
     id: '02',
+    Component: ReportAboutPage,
+    selectData: (report) => report.citiesSummary,
+  },
+  {
+    id: '03',
     Component: ReportPage02,
     selectData: (report) => report.citiesSummary,
   },
@@ -25,7 +31,7 @@ function ReportDocument({ report }) {
         </ReportPagePreview>
       ))}
       {report.regionDetails.map((region, index) => {
-        const pageNumber = index + 3
+        const pageNumber = index + 4
 
         return (
           <ReportPagePreview key={region.id}>

@@ -80,18 +80,19 @@ Calculations live in `reportCalculations.js`. Parsed values remain numeric; disp
 
 ## Report structure
 
-The report currently contains eight pages:
+The report currently contains nine pages:
 
 1. Cover
-2. All Cities summary
-3. Tehran
-4. Karaj
-5. Mashhad
-6. Shiraz
-7. Isfahan
-8. Northern Cities
+2. About this report
+3. All Cities summary
+4. Tehran
+5. Karaj
+6. Mashhad
+7. Shiraz
+8. Isfahan
+9. Northern Cities
 
-Pages 3 through 8 reuse `ReportPage03.jsx` with region-specific data and maps. Districts are sorted numerically, followed by other region names sorted with the Persian locale.
+Pages 4 through 9 reuse `ReportPage03.jsx` with region-specific data and maps. Districts are sorted numerically, followed by other region names sorted with the Persian locale. The browser print dialog proposes `MelkRadar.BazarMaskan.MonthlyReport.<Month><Year>.pdf` from the current workbook period.
 
 Report pages are real React/HTML/SCSS content, not design images. They use fixed A4 measurements and page breaks. Browser preview scaling must not change the print layout. `Design/pages/` is the visual reference for the original page designs.
 

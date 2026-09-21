@@ -315,7 +315,7 @@ function ReportPage03({ data, pageNumber = 3 }) {
           <strong>مبنای تحلیل:</strong>
           <span>آگهی‌های فروش و اجاره ثبت‌شده</span>
           <span>
-            در {currentPeriod} و {previousPeriod} در دیتای ملک‌رادار.
+            در {currentPeriod} و {previousPeriod} براساس دیتای ملک‌رادار.
           </span>
         </div>
         <div className="tehran-analysis__insight">

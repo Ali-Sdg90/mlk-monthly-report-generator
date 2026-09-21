@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { printReport } from '../services/printReport'
+import { formatReportFileName } from '../utils/formatPeriodLabel'
 import ReportDocument from './ReportDocument'
 import ReportTitleEditor from './ReportTitleEditor'
 import ReportToolbar from './ReportToolbar'
@@ -7,6 +8,15 @@ import ReportToolbar from './ReportToolbar'
 function ReportPreview({ report, onBack, onTitleChange }) {
   const [isPreparing, setIsPreparing] = useState(false)
   const [printError, setPrintError] = useState('')
+
+  useEffect(() => {
+    const previousTitle = document.title
+    document.title = formatReportFileName(report.cover.period)
+
+    return () => {
+      document.title = previousTitle
+    }
+  }, [report.cover.period])
 
   const handlePrint = async () => {
     if (isPreparing) return

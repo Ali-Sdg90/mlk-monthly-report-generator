@@ -36,18 +36,15 @@ function SmartDecisionIcon() {
 
 const featureItems = [
   {
-    title: 'داده‌های واقعی',
-    text: 'از آگهی‌های ملک‌رادار',
+    title: 'صدها هزار آگهی',
     Icon: DatabaseIcon,
   },
   {
-    title: 'تحلیل دقیق',
-    text: 'براساس داده‌ها',
+    title: 'تحلیل منطقه‌ای',
     Icon: TargetIcon,
   },
   {
-    title: 'تصمیم‌های هوشمند',
-    text: 'در بازار مسکن',
+    title: 'روند بازار',
     Icon: SmartDecisionIcon,
   },
 ]
@@ -122,13 +119,12 @@ function ReportPage01({ data }) {
 
       <footer className="cover-footer">
         <div className="cover-features">
-          {featureItems.map(({ title, text, Icon }, index) => (
+          {featureItems.map(({ title, Icon }, index) => (
             <div className="cover-feature" key={title}>
               {index > 0 && <span className="cover-feature__separator" />}
               <Icon />
               <div>
                 <strong>{title}</strong>
-                <span>{text}</span>
               </div>
             </div>
           ))}

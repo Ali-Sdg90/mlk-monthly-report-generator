@@ -1,8 +1,10 @@
 const numberFormatter = new Intl.NumberFormat('fa-IR', {
-  maximumFractionDigits: 0,
+  minimumFractionDigits: 1,
+  maximumFractionDigits: 1,
 })
 
 const decimalFormatter = new Intl.NumberFormat('fa-IR', {
+  minimumFractionDigits: 1,
   maximumFractionDigits: 1,
 })
 

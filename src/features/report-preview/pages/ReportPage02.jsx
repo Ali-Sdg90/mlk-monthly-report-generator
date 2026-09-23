@@ -8,6 +8,7 @@ const numberFormatter = new Intl.NumberFormat('fa-IR', {
 })
 
 const percentagePointFormatter = new Intl.NumberFormat('fa-IR', {
+  minimumFractionDigits: 1,
   maximumFractionDigits: 1,
 })
 
@@ -53,12 +54,12 @@ const metricHeaders = [
   {
     type: 'sale',
     title: 'قیمت فروش',
-    unit: 'تومان / مترمربع',
+    unit: 'میلیون تومان / مترمربع',
   },
   {
     type: 'mortgage',
     title: 'قیمت رهن کامل',
-    unit: 'تومان / مترمربع',
+    unit: 'میلیون تومان / مترمربع',
   },
   {
     type: 'ratio',

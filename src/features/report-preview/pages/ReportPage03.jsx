@@ -29,14 +29,14 @@ const summaryMetrics = [
   {
     type: 'sale',
     title: 'قیمت فروش',
-    unit: 'تومان / مترمربع',
+    unit: 'میلیون تومان / مترمربع',
     valueKey: 'salePrice',
     changeKey: 'saleGrowth',
   },
   {
     type: 'mortgage',
     title: 'قیمت رهن کامل',
-    unit: 'تومان / مترمربع',
+    unit: 'میلیون تومان / مترمربع',
     valueKey: 'mortgagePrice',
     changeKey: 'mortgageGrowth',
   },
@@ -96,6 +96,15 @@ function ChangeCell({ value, kind }) {
       <TrendIcon value={value} />
       <b className="tehran-table-number">{formatChange(value, kind)}</b>
       <small>{kind === 'ratio' ? 'واحد' : '٪'}</small>
+    </span>
+  )
+}
+
+function PriceTableValue({ value }) {
+  return (
+    <span className="tehran-table-price">
+      <span className="tehran-table-number">{formatPrice(value)}</span>
+      {false && Number.isFinite(value) && <small>میلیون</small>}
     </span>
   )
 }
@@ -245,10 +254,10 @@ function ReportPage03({ data, pageNumber = 3 }) {
                 <span className="tehran-district-heading">{regionLabel}</span>
               </th>
               <th colSpan="3">
-                قیمت فروش <small>(تومان / مترمربع)</small>
+                قیمت فروش <small>(میلیون تومان / مترمربع)</small>
               </th>
               <th colSpan="3">
-                قیمت رهن کامل <small>(تومان / مترمربع)</small>
+                قیمت رهن کامل <small>(میلیون تومان / مترمربع)</small>
               </th>
               <th colSpan="3">
                 نسبت رهن به فروش <small>(درصد)</small>
@@ -271,27 +280,19 @@ function ReportPage03({ data, pageNumber = 3 }) {
               <tr key={region.key}>
                 <th>{region.label}</th>
                 <td>
-                  <span className="tehran-table-number">
-                    {formatPrice(region.currentSalePrice)}
-                  </span>
+                  <PriceTableValue value={region.currentSalePrice} />
                 </td>
                 <td>
-                  <span className="tehran-table-number">
-                    {formatPrice(region.previousSalePrice)}
-                  </span>
+                  <PriceTableValue value={region.previousSalePrice} />
                 </td>
                 <td>
                   <ChangeCell value={region.saleGrowth} kind="price" />
                 </td>
                 <td>
-                  <span className="tehran-table-number">
-                    {formatPrice(region.currentMortgagePrice)}
-                  </span>
+                  <PriceTableValue value={region.currentMortgagePrice} />
                 </td>
                 <td>
-                  <span className="tehran-table-number">
-                    {formatPrice(region.previousMortgagePrice)}
-                  </span>
+                  <PriceTableValue value={region.previousMortgagePrice} />
                 </td>
                 <td>
                   <ChangeCell value={region.mortgageGrowth} kind="price" />

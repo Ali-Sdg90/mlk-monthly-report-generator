@@ -504,6 +504,20 @@
   letter-spacing: -0.1px;
 }
 
+.tehran-table-price {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  direction: rtl;
+  gap: 2px;
+}
+
+.tehran-table-price small {
+  color: var(--tehran-muted);
+  font-size: 6px;
+  font-weight: 500;
+}
+
 .tehran-districts tbody tr:nth-child(even) {
   background: #fcfdfd;
 }

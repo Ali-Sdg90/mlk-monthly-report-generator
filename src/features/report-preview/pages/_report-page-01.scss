@@ -264,7 +264,7 @@
   min-width: 166px;
   align-items: center;
   direction: ltr;
-  gap: 9px;
+  gap: 6px;
 }
 
 .cover-feature svg {
@@ -291,6 +291,8 @@
   direction: rtl;
   flex-direction: column;
   text-align: right;
+  position: relative;
+  top: 1px;
 }
 
 .cover-feature:last-child > div {
@@ -300,17 +302,6 @@
 .cover-feature strong {
   font-size: 12px;
   font-weight: 800;
-}
-
-.cover-feature div span {
-  margin-top: 1px;
-  color: #59616d;
-  font-size: 9px;
-  font-weight: 450;
-}
-
-.cover-feature:nth-child(2) div span {
-  text-align: left;
 }
 
 .cover-feature__separator {

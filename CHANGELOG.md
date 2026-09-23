@@ -1,3 +1,10 @@
+## [1.11.4](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.11.3...v1.11.4) (2026-09-23)
+
+
+### Bug Fixes
+
+* finalize how numbers be shown in tables ([f9138be](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/commit/f9138be66b51949b0a054053b8a36efe5ab72c8b))
+
 ## [1.11.3](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.11.2...v1.11.3) (2026-09-23)
 
 

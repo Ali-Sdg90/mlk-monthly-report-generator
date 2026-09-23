@@ -1,3 +1,10 @@
+## [1.11.3](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.11.2...v1.11.3) (2026-09-23)
+
+
+### Bug Fixes
+
+* update page 1 tag texts, test new number type in showcasing data ([d7f644b](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/commit/d7f644bfbb376b5968000101d92179d7034c37da))
+
 ## [1.11.2](https://github.com/Ali-Sdg90/mlk-monthly-report-generator/compare/v1.11.1...v1.11.2) (2026-09-21)
 
 

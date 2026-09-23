@@ -7,7 +7,7 @@ const numberFormatter = new Intl.NumberFormat('fa-IR', {
   maximumFractionDigits: 0,
 })
 
-const percentagePointFormatter = new Intl.NumberFormat('fa-IR', {
+const decimalFormatter = new Intl.NumberFormat('fa-IR', {
   minimumFractionDigits: 1,
   maximumFractionDigits: 1,
 })
@@ -15,18 +15,25 @@ const percentagePointFormatter = new Intl.NumberFormat('fa-IR', {
 const formatNumber = (value) =>
   Number.isFinite(value) ? numberFormatter.format(Math.round(value)) : '—'
 
-const formatChange = (value, kind) => {
+const formatChange = (value) => {
   if (!Number.isFinite(value)) return '—'
 
   const absoluteValue = Math.abs(value)
 
-  return kind === 'ratio'
-    ? percentagePointFormatter.format(absoluteValue)
+  return absoluteValue < 10
+    ? decimalFormatter.format(absoluteValue)
     : formatNumber(absoluteValue)
 }
 
-const formatPrice = (value) =>
-  Number.isFinite(value) ? formatNumber(value / 1_000_000) : '—'
+const formatPrice = (value) => {
+  if (!Number.isFinite(value)) return '—'
+
+  const valueInMillions = value / 1_000_000
+
+  return Math.abs(valueInMillions) < 10
+    ? decimalFormatter.format(valueInMillions)
+    : numberFormatter.format(valueInMillions)
+}
 const formatRatio = (value) =>
   Number.isFinite(value) ? formatNumber(value * 100) : '—'
 const directionFor = (value) =>

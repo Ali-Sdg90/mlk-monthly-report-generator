@@ -104,7 +104,7 @@ function PriceTableValue({ value }) {
   return (
     <span className="tehran-table-price">
       <span className="tehran-table-number">{formatPrice(value)}</span>
-      {false && Number.isFinite(value) && <small>میلیون</small>}
+      {true && Number.isFinite(value) && <small>م</small>}
     </span>
   )
 }
